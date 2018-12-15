@@ -1,0 +1,60 @@
+page-dashbord {
+    .frgt-area2 {
+        text-align: center;
+        padding: -1px 2.6rem;
+    }
+    .rr-row h3{
+        line-height: 40px;
+    }
+    .rr-item{
+        background: #214356 !important;
+        //margin: 15px 0 0;
+    }
+    .kk-item{
+        background: #214356 !important;
+        margin-top: 10px;
+    }
+    .cc-content ion-item:nth-of-type(2n) {
+        background: #f5f4f4;
+    }
+    .cc-content ion-item:nth-of-type(2n+1) {
+        background: #f7e6f4;
+    }
+    .frgt-area3 {
+        text-align: center;
+        width: 100%;
+        display: block;
+        margin-top: 15px;
+    }
+    .frgt-area2 button {
+        width: 4px;
+        height: 12px;
+        padding: 0px 1.6rem;
+        font-size: 0.80rem;
+    }
+    .rr-item h5 {
+        font-size: 13px;
+        margin-right: 15px;
+    }
+    .rr-item h5:last-child{
+        margin-right: 0;
+    }
+    .select-text {
+        color: #fff;
+    }
+    .book_item{
+        text-align: center;
+        background: #414a50 !important;
+        //margin: 15px 0 0;
+    }
+    .cc-content ion-label{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .mm-xx{
+        margin: -1px 0 25px;
+    }
+    .list-on {
+        margin-bottom: 30px;
+    }
+}

@@ -1,0 +1,108 @@
+
+<ion-header>
+    <ion-navbar color="success">
+      <ion-title>My MOT</ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content >
+<ion-list class="scroll-content">
+  <ion-item >
+    <ion-row>
+      <ion-col >
+        <h2 ion-text color="white">Right Arm(inch)</h2><br>
+        <strong *ngIf="mot.right_arm != null" ion-text color="success">{{mot.right_arm}}</strong>
+        <strong *ngIf="mot.right_arm == null" ion-text color="success">n/a</strong>
+      </ion-col>
+      <ion-col>
+          <h2 ion-text color="white">Left Arm(inch)</h2><br>
+          <strong *ngIf="mot.left_arm != null" ion-text color="success">{{mot.left_arm}}</strong>
+          <strong *ngIf="mot.left_arm == null" ion-text color="success">n/a</strong>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item>
+      <ion-row>
+        <ion-col>
+          <h2 ion-text color="white">Chest(inch)</h2><br>
+          <strong *ngIf="mot.chest != null" ion-text color="success">{{mot.chest}}</strong>
+          <strong *ngIf="mot.chest == null" ion-text color="success">n/a</strong>
+        </ion-col>
+        <ion-col>
+            <h2 ion-text color="white">Waist(inch)</h2><br>
+            <strong *ngIf="mot.waist != null" ion-text color="success">{{mot.waist}}</strong>
+          <strong *ngIf="mot.waist == null" ion-text color="success">n/a</strong>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+        <ion-row>
+          <ion-col>
+            <h2 ion-text color="white">Hips(inch)</h2><br>
+            <strong *ngIf="mot.hips != null" ion-text color="success">{{mot.hips}}</strong>
+            <strong *ngIf="mot.hips == null" ion-text color="success">n/a</strong>
+          </ion-col>
+          <ion-col>
+              <h2 ion-text color="white">BP(mmHg)</h2><br>
+              <strong *ngIf="mot.blood_pressure != null" ion-text color="success">{{mot.blood_pressure}}</strong>
+              <strong *ngIf="mot.blood_pressure == null" ion-text color="success">n/a</strong>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+          <ion-row>
+            <ion-col>
+              <h2 ion-text color="white">Right Thigh(Inch)</h2><br>
+              <strong *ngIf="mot.right_thigh != null" ion-text color="success">{{mot.right_thigh}}</strong>
+              <strong *ngIf="mot.right_thigh == null" ion-text color="success">n/a</strong>
+            </ion-col>
+            <ion-col>
+                <h2 ion-text color="white">Left thigh(Inch)</h2><br>
+                <strong *ngIf="mot.left_thigh != null" ion-text color="success">{{mot.left_thigh}}</strong>
+              <strong *ngIf="mot.left_thigh == null" ion-text color="success">n/a</strong>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <h2 ion-text color="white">Right calf(Inch)</h2><br>
+                <strong *ngIf="mot.right_calf != null" ion-text color="success">{{mot.right_calf}}</strong>
+                <strong *ngIf="mot.right_calf == null" ion-text color="success">n/a</strong>
+              </ion-col>
+              <ion-col>
+                  <h2 ion-text color="white">Left calf(Inch)</h2><br>
+                  <strong *ngIf="mot.left_calf != null" ion-text color="success">{{mot.left_calf}}</strong>
+                  <strong *ngIf="mot.left_calf == null" ion-text color="success">n/a</strong>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+              <ion-row>
+                <ion-col>
+                  <h2 ion-text color="white">Height(Inch)</h2><br>
+                  <strong *ngIf="mot.height != null" ion-text color="success">{{mot.height}}</strong>
+                  <strong *ngIf="mot.height == null" ion-text color="success">n/a</strong>
+                </ion-col>
+                <ion-col>
+                    <h2 ion-text color="white">Heart beat(bpm)</h2><br>
+                    <strong *ngIf="mot.heart_beat != null" ion-text color="success">{{mot.heart_beat}}</strong>
+                  <strong *ngIf="mot.heart_beat == null" ion-text color="success">n/a</strong>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            <ion-item>
+                <ion-row>
+                  <ion-col>
+                    <h2 ion-text color="white">Start weight(pound)</h2><br>
+                    <strong *ngIf="mot.starting_weight != null" ion-text color="success">{{mot.starting_weight}}</strong>
+                    <strong *ngIf="mot.starting_weight == null" ion-text color="success">n/a</strong>
+                  </ion-col>
+                  <ion-col>
+                      <h2 ion-text color="white">End weight(pound)</h2><br>
+                      <strong *ngIf="mot.ending_weight != null" ion-text color="success">{{mot.ending_weight}}</strong>
+                      <strong *ngIf="mot.ending_weight == null" ion-text color="success">n/a</strong>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+</ion-list>
+</ion-content>

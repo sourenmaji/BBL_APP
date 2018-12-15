@@ -1,0 +1,86 @@
+<ion-header class="cm-hdr">
+    <ion-navbar color="success">
+       <ion-buttons style="float:left">
+            <button ion-button icon-only   (click)="onOpenMenu()">
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Edit Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="cm-cntnt">
+    <ion-card class="wlcm-crd">
+        <ion-card-content>
+
+            
+             
+              <ion-item class="box-image">
+                      <img src="assets/imgs/profile.png">
+                      <h1 ion-text style="text-align: center" color="text">Hii {{userDetails.name}}</h1>
+              </ion-item>
+          <ion-list>
+              <form novalidate [formGroup]="editform">
+                <ion-item>
+                  <ion-label ><ion-icon color="grey" name="contact"></ion-icon>Full Name <span style="color: red">*</span></ion-label>
+                  <ion-input type="text" [(ngModel)]="userData.name" value="{{userDetails.name}}"
+                  formControlName="name" [class.error1]="!editform.controls.name.valid && editform.controls.name.dirty"></ion-input>
+                </ion-item>
+                <ion-item no-lines *ngIf="( editform.get('name').hasError('minlength') || editform.get('name').hasError('maxlength') ||editform.get('name').hasError('pattern') ||editform.get('name').hasError('required') ) && editform.get('name').touched">
+                  <div class="error" *ngIf="editform.get('name').hasError('required') && editform.get('name').touched">
+                    Please enter your name
+                  </div>
+                  <div class="error" *ngIf="editform.get('name').hasError('minlength') && editform.get('name').touched">
+                    Minimum 4 characters
+                  </div>
+                  <div class="error" *ngIf="editform.get('name').hasError('maxlength') && editform.get('name').touched">
+                    Maximum 30 characters
+                  </div>
+                  <div class="error" *ngIf="editform.get('name').hasError('pattern') && editform.get('name').touched">
+                    Name must contain alphabets and spaces only
+                  </div>
+                </ion-item>
+                    <ion-item>
+                      <ion-label ><ion-icon color="grey" name="mail"></ion-icon>Email <span style="color: red">*</span></ion-label>
+                      <ion-input type="email" [(ngModel)]="userData.email" value="{{userDetails.email}}"
+                      formControlName="email" [class.error1]="!editform.controls.email.valid && editform.controls.email.dirty"></ion-input>
+                    </ion-item>
+                    <ion-item no-lines *ngIf="( editform.get('email').hasError('minlength') || editform.get('email').hasError('pattern') ||editform.get('email').hasError('required') ) && editform.get('email').touched">
+                      <div class="error" *ngIf="editform.get('email').hasError('required') && editform.get('email').touched">
+                        Please enter your email
+                      </div>
+                      <div class="error" *ngIf="editform.get('email').hasError('pattern') && editform.get('email').touched">
+                        This value should be a valid email
+                      </div>
+                    </ion-item>
+                      <ion-item>
+                          <ion-label ><ion-icon color="grey" name="call"></ion-icon>Phone No.<span style="color: red">*</span></ion-label>
+                          <ion-input   id="ph_no" type="text" [(ngModel)]="userData.ph_no" value="{{userDetails.ph_no}}"
+                          formControlName="ph_no" [class.error1]="!editform.controls.ph_no.valid && editform.controls.ph_no.dirty"
+                          ></ion-input>
+                          
+                        </ion-item>
+    
+                        <ion-item no-lines *ngIf="( editform.get('ph_no').hasError('minlength') || editform.get('ph_no').hasError('pattern') ||editform.get('ph_no').hasError('required')) && editform.get('ph_no').touched">
+                          <div class="error" *ngIf="editform.get('ph_no').hasError('required') && editform.get('ph_no').touched">
+                            Please enter your phone no.
+                          </div>
+                          <div class="error" *ngIf="editform.get('ph_no').hasError('pattern') && editform.get('ph_no').touched">
+                            This value should be a valid phone no.
+                          </div>
+    
+                        </ion-item>
+                       
+                        <ion-item>
+                            <ion-label ><ion-icon color="grey" name="locate"></ion-icon>Address</ion-label>
+                            <ion-textarea myInput type="text" value="{{userDetails.address}}" [(ngModel)]="userData.address" formControlName="address"></ion-textarea>
+                          </ion-item>
+                          <div class="frgt-area2">
+                          <button  ion-button round color="success"  [disabled]="editform.invalid" (click)="updateProfile()">Save</button><br/>
+                        </div>
+                        </form>
+                </ion-list>
+                </ion-card-content>
+                </ion-card>
+</ion-content>

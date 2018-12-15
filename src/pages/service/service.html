@@ -1,0 +1,47 @@
+<ion-header>
+
+    <ion-navbar color="success" hideBackButton="true">
+        <ion-buttons style="float:left">
+            <button ion-button icon-only (click)="onOpenMenu()">
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Services</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+           
+               <h1 ion-text color="primary" style="text-align: center">Our Services</h1><br>
+               
+                       <img src="assets/imgs/under-lie.png" class="logo"/>
+              
+   </ion-item>
+   <ion-item *ngFor="let srvice of services">
+              <ion-card>
+                <ion-item>
+                    <h1 ion-text style="text-align: center" color="text">{{srvice.serviceName}}</h1>
+                </ion-item>
+                 
+                  <ion-item class="box-image">
+                          <img src="{{srvice.img}}">
+                  </ion-item>
+                  <ion-card-content >
+                     <h1 ion-text color="text">{{srvice.date}}</h1>
+                     <div *ngIf="srvice.description.length <= limit"><p text-wrap ion-text color="text1">{{srvice.description}}</p></div>
+                     <div *ngIf="truncating && srvice.description.length > limit">
+                       <p text-wrap ion-text color="text1">{{srvice.description | truncate : limit}}<br></p>
+                       <button ion-button outline (click)="truncating = false">show more</button>
+                     </div>
+                     <div *ngIf="!truncating && srvice.description.length > limit">
+                         <p text-wrap ion-text color="text1">{{srvice.description}}</p> 
+                       <button ion-button  style="border: none" clear (click)="truncating = true">show less</button>
+                     </div>
+                     
+                  </ion-card-content>
+              </ion-card>
+    </ion-item>
+   </ion-list>
+</ion-content>

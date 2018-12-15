@@ -1,0 +1,52 @@
+
+<ion-header>
+    <ion-navbar color="success">
+      <ion-title>View Bookings</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content>
+    <ion-list class="scroll-content vw-bkngs">
+        <ion-item >
+                 
+            <h2 ion-text color="white">Address</h2>
+              <strong text-wrap ion-text color="success">{{bookings.address_line1}}</strong>
+              <!-- <strong *ngIf="mot.right_arm == null" ion-text color="success">n/a</strong> -->
+           
+                <h2 ion-text color="white">Booked On</h2>
+                <strong  ion-text color="success">{{bookings.created_at | date : "MMM d, y"}}</strong>
+                <!-- <strong *ngIf="mot.left_arm == null" ion-text color="success">n/a</strong> -->
+              
+        </ion-item>
+        <ion-item>
+            
+                <h2 ion-text color="white">Booking Date</h2>
+                <strong  ion-text color="success">{{bookings.plan_date | date : "MMM d, y"}}</strong>
+                <!-- <strong *ngIf="mot.chest == null" ion-text color="success">n/a</strong> -->
+             
+                  <h2 ion-text color="white">Booking Time</h2>
+                  <strong  ion-text color="success">{{bookings.plan_st_time}} to {{bookings.plan_end_time}}</strong>
+                <!-- <strong *ngIf="mot.waist == null" ion-text color="success">n/a</strong> -->
+             
+          </ion-item>
+          <ion-item *ngIf="bookings.cancelled_by != 0">
+            
+              <h2 ion-text color="white">Status</h2>
+              <strong *ngIf="bookings.cancelled_by == 1" ion-text color="success">Cancelled</strong>
+              <strong *ngIf="bookings.cancelled_by == 2" ion-text color="success">Cancelled by admin</strong>
+              <!-- <strong *ngIf="mot.chest == null" ion-text color="success">n/a</strong> -->
+        </ion-item>
+          <!-- <ion-item>
+              <ion-row>
+                <ion-col>
+                  <h2 ion-text color="white">Status</h2><br>
+                  <strong  ion-text color="success">{{bookings.total_sessions}}</strong>
+                 
+                </ion-col>
+                
+              </ion-row>
+            </ion-item>
+             -->
+      </ion-list>
+</ion-content>

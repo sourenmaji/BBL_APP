@@ -1,0 +1,81 @@
+
+<ion-header>
+
+  <ion-navbar color="success">
+    <ion-title>View Bootcamp Purchase</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="vw-btcmp">
+  <ion-list class="scroll-content">
+    <ion-item >
+      <ion-row>
+        <ion-col >
+          <h2 ion-text color="white">Plan Type</h2><br>
+          <strong  ion-text color="success">{{purchase.training_type}}</strong>
+          <!-- <strong *ngIf="mot.right_arm == null" ion-text color="success">n/a</strong> -->
+        </ion-col>
+        <ion-col>
+            <h2 ion-text color="white">Plan Price</h2><br>
+            <strong  ion-text color="success">{{purchase.total_price}}</strong>
+            <!-- <strong *ngIf="mot.left_arm == null" ion-text color="success">n/a</strong> -->
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+        <ion-row>
+          <ion-col>
+            <h2 ion-text color="white">Purchased On</h2><br>
+            <strong  ion-text color="success">{{purchase.order_purchase_date}}</strong>
+            <!-- <strong *ngIf="mot.chest == null" ion-text color="success">n/a</strong> -->
+          </ion-col>
+          <ion-col>
+              <h2 ion-text color="white">Validity Date</h2><br>
+              <strong  ion-text color="success">{{purchase.order_validity_date}}</strong>
+            <!-- <strong *ngIf="mot.waist == null" ion-text color="success">n/a</strong> -->
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+          <ion-row>
+            <ion-col>
+              <h2 ion-text color="white">No of Session</h2><br>
+              <strong  ion-text color="success">{{purchase.total_sessions}}</strong>
+              <!-- <strong *ngIf="mot.hips == null" ion-text color="success">n/a</strong> -->
+            </ion-col>
+            <ion-col>
+                <h2 ion-text color="white">Remaining Sessison</h2><br>
+                <strong  ion-text color="success">{{purchase.remaining_sessions}}</strong>
+                <!-- <strong *ngIf="mot.blood_pressure == null" ion-text color="success">n/a</strong> -->
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+            <ion-row>
+              <ion-col>
+                <h2 ion-text color="white">Payment Mode</h2><br>
+                <strong  ion-text color="success">{{purchase.payment_option}}</strong>
+                <!-- <strong *ngIf="mot.right_thigh == null" ion-text color="success">n/a</strong> -->
+              </ion-col>
+              <ion-col>
+                  <h2 ion-text color="white">Plan Scheme</h2><br>
+                  <strong  ion-text color="success">{{purchase.payment_type}}</strong>
+                
+              </ion-col>
+            </ion-row>
+          </ion-item>
+          <ion-item>
+              <ion-row>
+                <ion-col>
+                  <h2 ion-text color="white">Status</h2><br>
+                  <strong  ion-text color="success">{{purchase.payment_status}}</strong>
+                 
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            
+  </ion-list>
+  </ion-content>
+  

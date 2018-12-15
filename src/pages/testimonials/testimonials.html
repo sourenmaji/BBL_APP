@@ -1,0 +1,49 @@
+<ion-header>
+
+    <ion-navbar color="success" hideBackButton="true">
+        <ion-buttons style="float:left">
+            <button ion-button icon-only (click)="onOpenMenu()">
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Testimonials</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+  <ion-content>
+      <ion-list>
+          <ion-item>
+                 
+                     <h1 ion-text color="primary" style="text-align: center">Testimonials</h1><br>
+                     
+                             <img src="assets/imgs/under-lie.png" class="logo"/>
+                    
+         </ion-item>
+         
+            <ion-slides *ngIf="testimonialsDetails && testimonialsDetails.length" pager="true" autoplay="5000" loop="true" speed="3000">
+                <ion-slide *ngFor="let testimonials of testimonialsDetails">
+                    <ion-card >
+                        <ion-item class="box-image">
+                                <img src="{{this.imageUrl+testimonials.image}}">
+                        </ion-item>
+                        <ion-card-content class="test-card">
+                           <h1 ion-text color="text">Client: {{testimonials.name}}</h1>
+                           <div *ngIf="testimonials.description.length <= limit"><p text-wrap ion-text color="text1">{{testimonials.description}}</p></div>
+                           <div *ngIf="truncating && testimonials.description.length > limit">
+                             <p text-wrap ion-text color="text1">{{testimonials.description | truncate : limit}}<br></p>
+                             <button ion-button outline (click)="truncating = false">show more</button>
+                           </div>
+                           <div *ngIf="!truncating && testimonials.description.length > limit">
+                               <p text-wrap ion-text color="text1">{{testimonials.description}}</p> 
+                             <button ion-button  style="border: none" clear (click)="truncating = true">show less</button>
+                           </div>
+                           
+                       </ion-card-content>
+                        </ion-card>
+                </ion-slide>
+                
+            </ion-slides>
+         </ion-list>
+  </ion-content>
+  

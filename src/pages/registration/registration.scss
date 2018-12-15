@@ -1,0 +1,208 @@
+page-registration {
+    
+      #welcome{
+        // background: color($colors, energy);
+        h3{
+            font-size: 25px;
+            margin-top:50px;
+            text-align: center;
+        }
+        .marginTop{
+            margin-top:150px;
+        }
+        .logo{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 280px;
+            height: auto;
+            margin-bottom: 40px;
+            margin-top: 110px;
+        }
+        h4{
+            margin-top:0px;
+            font-size: 15px;
+        }
+    }
+    .scroll-content {
+        background-image: url('../../assets/imgs/home.png');
+        background-size: cover;
+        background-position: center top;
+        width: 100%;
+        height: 100%;
+       // background: image(assets/imgs/bg-ban-seller);
+        //background-color: rgb(110, 23, 2);
+      }
+      .wlcm-crd {
+        background: none;
+        box-shadow: none;
+    }
+    
+    .wlcm-itm{
+        background: none;
+        padding-left: 0
+    }
+    .wlcm-abc{
+        background: none;
+        padding-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+        margin-bottom: 10px;
+    }
+    .wlcm-crd ion-card-content {
+        padding: 0;
+    }
+    .wlcm-crd input {
+        color: #f3ecec;
+    }
+    .wlcm-itm .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+        -webkit-box-shadow: inset 0 -1px 0 0 #ffffff;
+        box-shadow: inset 0 -1px 0 0 #ffffff;
+    }
+    .item-input-has-focus {
+        -webkit-box-shadow: inset 0 -1px 0 0 #ffffff !important;
+        box-shadow: inset 0 -1px 0 0 #ffffff !important;
+    }
+    .button-ios-success {
+        background-color: #ffffff;  
+      }
+    .wlcm-crd ion-label{
+        color:#ffffff !important;
+    }
+    // .wlcm-crd ion-icon{
+    //     text-decoration: none;
+    //     margin-right: 15px;
+    // }
+    .wlcm-crd a:hover, .wlcm-crd a:focus, .wlcm-crd a:active{
+        text-decoration: none;
+    }
+    .wlcm-crd a[disabled], button[disabled], [ion-button][disabled] {
+        cursor: default;
+        // opacity: 1;
+        pointer-events: none;
+    }
+    .wlcm-crd .list-md .item[no-lines], .list-md .item[no-lines] .item-inner {
+        border-width: 0;
+        background: none;
+        padding-left: 0;
+    }
+    .frgt-area{
+        text-align: center;
+    }
+    .nw-bb {
+        color: #efe7e7;
+    }
+    .bg-cir button{
+        background: #fff;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        line-height: 25px;
+        text-align: center;
+    }
+    .error {
+        color: rgb(223, 62, 62);
+        font-size: 11px;
+      }
+      
+      .error1 {
+        color: rgb(75, 75, 75);
+        border-bottom: 1px solid #ff0000;
+      }
+      .success {
+        color: rgb(84, 245, 10);
+        font-size: 11px;
+      }
+      .rg-wrp ion-card-content {
+        padding: 0;
+      }
+      .rg-wrp ion-item {
+        padding-left: 0;
+        background: none;
+      }
+      .rg-wrp ion-card{
+        background: none;
+        box-shadow: none;
+      }
+    .rg-wrp ion-label{
+      color:#ffb431 !important;
+  }
+  .rg-wrp a[disabled], button[disabled], [ion-button][disabled] {
+    cursor: default;
+    // opacity: 1;
+    pointer-events: none;
+}
+.button-ios-success {
+  background-color: #ffb431;  
+}
+.button-md-success {
+    color: #fff;
+    background-color: #fb5b21;
+    width: 190px;
+    border: 2px solid #fff;
+}
+.rg-wrp .toolbar-md-headers .toolbar-background-md {
+	background: #322a02;
+}
+.rg-wrp input {
+  color: #f3ecec;
+}
+.error {
+  font-size: 13px;
+  color: #e3e0e0;
+}
+.rg-wrp ion-card{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.alrdy-usr {
+	text-align: center;
+}
+.alrdy-usr span{
+  color: #efe7e7;
+}
+.alrdy-usr a {
+	text-decoration: none;
+}
+.header-color .toolbar-background-md {
+    border-color: none;
+    background: none;
+}
+.header-color .back-button-icon-md {
+    color: #fff;
+}
+.bg-cir span.button-inner {
+    position: absolute;
+    top: -7px;
+    left: -3.5px;
+    text-align: center;
+}
+.wlcm-crd span.button-inner {
+    display: inline-block;
+    line-height: 44px;
+}
+.wlcm-crd .button-md-success {
+    height: 45px;
+}
+.frgt-area2 {
+    text-align: center;
+    margin-top: 20px;
+}
+span.nw-bb.lg-with {
+    margin-top: 15px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.frgt-area a {
+    text-decoration: none;
+}
+.frgt-area2 a.text-md-success {
+    text-decoration: none;
+    font-weight: 600;
+}
+.wlcm-crd ion-icon{
+    text-decoration: none;
+    margin-right: 15px;
+    width: 24px;
+    font-size: 24px;
+}
+    }

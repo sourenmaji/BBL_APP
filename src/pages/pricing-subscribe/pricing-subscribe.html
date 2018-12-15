@@ -1,0 +1,95 @@
+
+<ion-header>
+  <ion-navbar color="success">
+    <ion-title>Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+    <form (ngSubmit)="logForm()">
+    <ion-card class="wlcm-crd">
+        <ion-card-content>
+  <ion-list class="scroll-content">
+    <!-- <ion-item>
+      <h1 ion-text color="white">Customer Details</h1>
+    </ion-item>
+    <ion-item>
+        <h3 ion-text color="white">Name - <span><h2 ion-text color="success">{{userDetails.name}}</h2></span></h3><br>
+        <h3 ion-text color="white">Email - <span><h2 ion-text color="success">{{userDetails.email}}</h2></span></h3><br>
+        <h3 ion-text color="white">Phone - <span><h2 ion-text color="success">{{userDetails.ph_no}}</h2></span></h3><br>
+    </ion-item> -->
+    <ion-item>
+        <h1 ion-text color="white">Product Details</h1>
+    </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+              <h2 ion-text color="white">Plan Type -</h2><br>
+              <strong  ion-text color="success">{{price.training_name}}</strong>
+              
+          </ion-col>
+        <ion-col>
+            <h2 ion-text color="white">Price -</h2><br>
+            <strong  ion-text color="success">{{price.total_price}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+              <h2 ion-text color="white">No. Of Sessions -</h2><br>
+              <strong  ion-text color="success">{{price.total_sessions}}</strong>
+              
+          </ion-col>
+        <ion-col>
+            <h2 ion-text color="white">Validity -</h2><br>
+            <strong *ngIf="price.validity_duration != null" ion-text color="success">{{price.validity_duration}}</strong>
+            <strong *ngIf="price.validity_duration == null" ion-text color="success">N/A</strong>
+        </ion-col>
+      </ion-row>
+      </ion-item>
+            <!-- <ion-col>
+          <h3 ion-text color="white">No. Of Sessions - <span ion-text color="success">{{price.total_sessions}}</span></h3>
+          <h3 *ngIf="price.validity_duration != null" ion-text color="white">Validity - <span ion-text color="success">{{price.validity_duration}}</span> </h3>
+          <h3 *ngIf="price.validity_duration == null" ion-text color="white">Validity - <span><h2 ion-text color="success">N/A</h2></span> </h3>
+          </ion-col>
+          
+        </ion-item> -->
+       
+      
+          <ion-list  *ngIf="price.payment_type_name == 'Pay as you go'" radio-group [(ngModel)]="data.paymentOption" [ngModelOptions]="{standalone: true}" class="pricing">
+          <ion-item>
+          <h1 ion-text color="white">Payment Option</h1>
+        </ion-item>
+        <ion-item>
+          <ion-label ion-text color="white">Stripe Payment</ion-label>
+            <ion-radio   value="onlinePayment"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label ion-text color="white">Bank Transfer</ion-label>
+            <ion-radio   value="bankTransfer" ></ion-radio>
+        </ion-item>
+          </ion-list>
+      
+          <ion-list  *ngIf="price.payment_type_name == 'Subscription'" radio-group [(ngModel)]="data.paymentOption" [ngModelOptions]="{standalone: true}" class="pricing">
+            <ion-item>
+            <h1 ion-text color="white">Payment Option</h1>
+          </ion-item>
+          <!-- <ion-item>
+            <ion-label ion-text color="white">Card Payment</ion-label>
+              <ion-radio   value="onlinePayment"></ion-radio>
+          </ion-item> -->
+          <ion-item>
+            <ion-label ion-text color="white">Bank Transfer</ion-label>
+              <ion-radio selected   value="bankTransfer" ></ion-radio>
+          </ion-item>
+            </ion-list>
+         <ion-item>
+            <div class="frgt-area">
+                <button class="button-md-success" ion-button round type="submit">Submit</button>
+         </div>
+         </ion-item>
+  </ion-list>
+  </ion-card-content>
+  </ion-card>
+  </form>
+  </ion-content>
+  

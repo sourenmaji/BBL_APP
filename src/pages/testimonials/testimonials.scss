@@ -1,0 +1,34 @@
+page-testimonials {
+    .logo{
+        height: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    .ss-iframe{
+        height: auto;
+        width: auto;
+       vertical-align: -webkit-baseline-middle;
+    }
+    .button-outline-md {
+
+        color: #488aff;
+        border: none;
+    }
+    .box-image{
+       text-align: center;
+    }
+    .box-image img{
+        height: 276px;
+        width: 276px;
+        border-radius: 50%;
+        line-height: 25px;
+        text-align: center;
+        margin: 0 auto;
+        
+    }
+    .test-card{
+        height: 130px;
+    }
+}

@@ -1,0 +1,34 @@
+<ion-menu class="cus-men" [content]="nav">
+    <ion-header>
+        <ion-navbar color="success" hideBackButton="true">
+            <ion-title>Menu</ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content>
+        
+        <img src="assets/imgs/icon.png" style="display: block; margin-left: auto; margin-right: auto;width: 200px;margin-top: 20px; margin-bottom: 30px;"/>
+
+        <ion-list  *ngFor="let p of pages">
+            <button *ngIf="((p.title != 'Profile' && p.title != 'Edit Profile') && (p.title != 'Change Password' && p.title != 'Log Out'))" class="aa_list" menuClose ion-item  [class.activeHighlight]="checkActive(p)" (click)="openPage(p)">
+                    <ion-icon color="dash1" name="{{p.iconName}}"></ion-icon> {{p.title}}
+            </button>
+            
+             <button *ngIf="(p.title == 'Profile')" class="aa_list" ion-item icon-left (click)="clickProfile()">
+                    <ion-icon color="dash1" name="{{p.iconName}}"></ion-icon>{{p.title}}
+                    <ion-icon color="dash1" name="arrow-dropright" style="margin-left: 170px"></ion-icon>
+             </button>
+             <div *ngIf="isclick" class="aa_change">
+                    <button *ngIf="(p.title == 'Edit Profile')" class="aa_list" ion-item icon-left (click)="openPage(p)" [class.activeHighlight]="checkActive(p)">
+                            <ion-icon color="dash1" name="{{p.iconName}}"></ion-icon>{{p.title}}
+                     </button>
+                     <button *ngIf="(p.title == 'Change Password')" class="aa_list" ion-item icon-left (click)="openPage(p)" [class.activeHighlight]="checkActive(p)">
+                            <ion-icon color="dash1" name="{{p.iconName}}"></ion-icon>{{p.title}}
+                     </button>
+                     <button *ngIf="(p.title == 'Log Out')" class="aa_list" ion-item icon-left (click)="onLogout()">
+                            <ion-icon color="dash1" name="{{p.iconName}}"></ion-icon>Logout
+                     </button>
+             </div>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #nav></ion-nav>

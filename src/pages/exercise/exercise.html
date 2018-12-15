@@ -1,0 +1,50 @@
+
+<ion-header>
+  <ion-navbar color="success">
+     <ion-buttons style="float:left">
+          <button ion-button icon-only   (click)="onOpenMenu()">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Exercise</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+               
+                   <h1 ion-text color="primary" style="text-align: center">Top Exercise</h1> <br>
+                   
+                           <img src="assets/imgs/under-lie.png" class="logo"/>
+              
+       </ion-item>
+       <ion-item *ngFor ="let exercise of exerciseDetails; let i = index">
+       <ion-card>
+       <ion-item class="ss-iframe" *ngIf="exercise.video != null">
+          <iframe  [src]="updateVideoUrl(exercise.video)" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </ion-item> 
+       <ion-item class="box-image" *ngIf="exercise.image != null">
+        <img src="{{this.imageUrl+exercise.image}}">
+      </ion-item>
+       <!-- <ion-item>
+       <img src="{{this.imageUrl+business.business_image}}">
+      </ion-item> -->
+       <ion-card-content >
+          <h1 ion-text color="text">{{exercise.title}}</h1>
+          <div *ngIf="exercise.description.length <= limit"><p text-wrap ion-text color="text1">{{exercise.description}}</p></div>
+          <div *ngIf="truncating && exercise.description.length > limit">
+            <p text-wrap ion-text color="text1">{{exercise.description | truncate : limit}}<br></p>
+            <button ion-button outline (click)="truncating = false">show more</button>
+          </div>
+          <div *ngIf="!truncating && exercise.description.length > limit">
+              <p text-wrap ion-text color="text1">{{exercise.description}}</p> 
+            <button ion-button  style="border: none" clear (click)="truncating = true">show less</button>
+          </div>
+          
+      </ion-card-content>
+       </ion-card>
+       </ion-item>
+       </ion-list>
+</ion-content>

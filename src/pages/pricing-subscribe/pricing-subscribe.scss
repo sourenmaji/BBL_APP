@@ -1,0 +1,42 @@
+page-pricing-subscribe {
+    .frgt-area{
+        text-align: center;
+        background: none;
+    }
+    .scroll-content {
+        background-color: #252631; 
+      }
+      .scroll-content strong{
+        font-size: 21px;
+      }
+      .scroll-content ion-item{
+          background-color: transparent;
+      }
+      
+      .wlcm-abc{
+        background: none;
+        padding-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+        margin-bottom: 10px;
+    }
+    .wlcm-crd {
+        background: none;
+        box-shadow: none;
+    }
+    .button-md-success {
+        color: #fff;
+        background-color: #fb5b21;
+        width: 190px;
+        border: 2px solid #fff;
+    }
+    .pricing .item-radio-checked ion-label {
+        color: #fb5b21 !important;
+    }
+    .pricing ion-radio .radio-checked {
+        border-color: #ffffff;
+    }
+
+    .pricing ion-radio .radio-inner {
+        background: #fb5b21;
+    }
+}

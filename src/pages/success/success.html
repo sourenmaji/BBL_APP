@@ -1,0 +1,21 @@
+
+<ion-header>
+    <ion-navbar color="success" hideBackButton >
+        <ion-buttons style="float:left">
+            <button ion-button icon-only   (click)="onOpenMenu()">
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Success</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+    <img src="assets/imgs/tick-flat.png" class="logo"/>
+
+    <p style="text-align: center">Payment success</p>
+    <p text-wrap style="text-align: center">Your Order Ref ID is {{order_ref_id}}. Please note down that Order Ref ID for future reference.</p>
+    <ion-col class="frgt-area3">   
+            <button ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+    </ion-col>
+</ion-content>

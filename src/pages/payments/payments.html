@@ -1,0 +1,162 @@
+
+<ion-header>
+    <ion-navbar color="success">
+      <ion-title *ngIf="PayOptions.paymentOption == 'onlinePayment'">Stripe Payments</ion-title>
+      <ion-title *ngIf="PayOptions.paymentOption == 'bankTransfer'">Bank Transfer</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content class="scroll-content" >
+  <div ion-fixed> 
+    <ion-card *ngIf="PayOptions.paymentOption == 'onlinePayment'" >
+            <form novalidate [formGroup]="cardPaymentform">
+        <h1 ion-text color="success" style="text-align: center">PAY FROM HERE</h1><br>
+        <h3 ion-text color="white" style="text-align: center">You can choose to pay by using online payment</h3><br>
+        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success"><ion-icon small name="logo-usd"></ion-icon>{{price.total_price}} </span></h3>
+        
+        
+        
+            <ion-item class="wlcm-abc">
+              <ion-label>Card Number<span style="color: red">*</span></ion-label>
+              <ion-input type="Number" [(ngModel)]="cardData.number" 
+              formControlName="number"></ion-input>
+            </ion-item>
+            <ion-item class="wlcm-itm"  *ngIf="( cardPaymentform.get('number').hasError('minlength')  ||cardPaymentform.get('number').hasError('required') || cardPaymentform.get('number').hasError('maxlength'))">
+              <div class="error" *ngIf="cardPaymentform.get('number').hasError('required') && cardPaymentform.get('number').touched">
+                Please enter your 16 digit card number
+              </div>
+              <div class="error" *ngIf="((cardPaymentform.get('number').hasError('minlength') && cardPaymentform.get('number').touched) || cardPaymentform.get('number').hasError('maxlength') && cardPaymentform.get('number').touched)">
+                This value should be 16 digit.
+              </div>
+            </ion-item>
+            <ion-item class="wlcm-abc">
+              <ion-label>Exp Month <span style="color: red">*</span></ion-label>
+              <!-- <ion-input type="Number" [(ngModel)]="cardData.expMonth"  clearOnEdit="false" placeholder="MM"
+              formControlName="expMonth">
+              </ion-input> -->
+              <ion-select [(ngModel)]="cardData.expMonth" formControlName="expMonth">
+                <ion-option value="01">01</ion-option>
+                <ion-option value="02">02</ion-option>
+                <ion-option value="03">03</ion-option>
+                <ion-option value="04">04</ion-option>
+                <ion-option value="05">05</ion-option>
+                <ion-option value="06">06</ion-option>
+                <ion-option value="07">07</ion-option>
+                <ion-option value="08">08</ion-option>
+                <ion-option value="09">09</ion-option>
+                <ion-option value="10">10</ion-option>
+                <ion-option value="11">11</ion-option>
+                <ion-option value="12">12</ion-option>
+              </ion-select>
+            </ion-item>
+            
+            <ion-item class="wlcm-itm" *ngIf="( cardPaymentform.get('expMonth').hasError('minlength') || cardPaymentform.get('expMonth').hasError('maxlength') ||cardPaymentform.get('expMonth').hasError('required') )">
+              <div class="error" *ngIf="cardPaymentform.get('expMonth').hasError('required') && cardPaymentform.get('expMonth').touched">
+               Please enter card expiration month
+              </div>
+              <div class="error" *ngIf="((cardPaymentform.get('expMonth').hasError('minlength') && cardPaymentform.get('expMonth').touched) || cardPaymentform.get('expMonth').hasError('maxlength'))">
+                    This value should be 2 digit.
+              </div>
+            </ion-item>
+            <ion-item class="wlcm-abc">
+                    <ion-label>Exp Year <span style="color: red">*</span></ion-label>
+                    <!-- <ion-input type="Number"  [(ngModel)]="cardData.expYear"  clearOnEdit="false" placeholder="YY"
+                    formControlName="expYear">
+                  </ion-input> -->
+                  <ion-select [(ngModel)]="cardData.expYear" formControlName="expYear">
+                    <ion-option value="2018">2018</ion-option>
+                    <ion-option value="2019">2019</ion-option>
+                    <ion-option value="2020">2020</ion-option>
+                    <ion-option value="2021">2021</ion-option>
+                    <ion-option value="2022">2022</ion-option>
+                    <ion-option value="2023">2023</ion-option>
+                    <ion-option value="2024">2024</ion-option>
+                    <ion-option value="2025">2025</ion-option>
+                    <ion-option value="2026">2026</ion-option>
+                    <ion-option value="2027">2027</ion-option>
+                    <ion-option value="2028">2028</ion-option>
+                    <ion-option value="2029">2029</ion-option>
+                    <ion-option value="2030">2030</ion-option>
+                    <ion-option value="2031">2031</ion-option>
+                    <ion-option value="2032">2032</ion-option>
+                    <ion-option value="2033">2033</ion-option>
+                    <ion-option value="2034">2034</ion-option>
+                    <ion-option value="2035">2035</ion-option>
+                    <ion-option value="2036">2036</ion-option>
+                    <ion-option value="2037">2037</ion-option>
+                    <ion-option value="2038">2038</ion-option>
+                    <ion-option value="2039">2039</ion-option>
+                    <ion-option value="2040">2040</ion-option>
+                  </ion-select>
+            </ion-item>
+                  
+                  <ion-item class="wlcm-itm" *ngIf="( cardPaymentform.get('expYear').hasError('minlength') || cardPaymentform.get('expYear').hasError('maxlength') ||cardPaymentform.get('expYear').hasError('required') )">
+                    <div class="error" *ngIf="cardPaymentform.get('expYear').hasError('required') && cardPaymentform.get('expYear').touched">
+                     Please enter card expiration Year
+                    </div>
+                    <div class="error" *ngIf="((cardPaymentform.get('expYear').hasError('minlength') && cardPaymentform.get('expYear').touched) || cardPaymentform.get('expYear').hasError('maxLength') && cardPaymentform.get('expYear').touched) ">
+                          This value should be 2 digit.
+                    </div>
+                  </ion-item>
+                  <ion-item class="wlcm-abc">
+                        <ion-label>CVV <span style="color: red">*</span></ion-label>
+                        <ion-input type="Number"  [(ngModel)]="cardData.cvc"  clearOnEdit="false" placeholder="CVV"
+                        formControlName="cvc"></ion-input>
+                   </ion-item>
+                      
+                   <ion-item class="wlcm-itm" *ngIf="( cardPaymentform.get('cvc').hasError('minlength') || cardPaymentform.get('cvc').hasError('maxlength') ||cardPaymentform.get('cvc').hasError('required') )">
+                        <div class="error" *ngIf="cardPaymentform.get('cvc').hasError('required') && cardPaymentform.get('cvc').touched">
+                         Please enter card CVV
+                        </div>
+                        <div class="error" *ngIf="((cardPaymentform.get('cvc').hasError('minlength') && cardPaymentform.get('cvc').touched) || cardPaymentform.get('cvc').hasError('maxLength') && cardPaymentform.get('cvc').touched)">
+                              This value should be 3 digit.
+                        </div>
+                        
+                   </ion-item>
+            
+          
+        
+        
+        <div class="frgt-area2">
+            <button class="button-md-success" ion-button round [disabled]="cardPaymentform.invalid" (click)="payOnline()">Pay Online</button>
+        </div>
+        </form>
+      </ion-card>
+   
+    
+    <ion-card *ngIf="PayOptions.paymentOption == 'bankTransfer'" >
+        <form novalidate [formGroup]="paymentform">
+        <h1 ion-text color="success" style="text-align: center">PAY FROM HERE</h1><br>
+        <h3 ion-text color="yyy" style="text-align: center">Sort Code : <span ion-text color="white">23-69-72</span></h3><br>
+        <h3 ion-text color="yyy" style="text-align: center">Account No : <span ion-text color="white">04449182</span></h3><br>
+        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success"><ion-icon small name="logo-usd"></ion-icon>{{price.total_price}} </span></h3>
+        
+        
+            <h3 ion-text color="yyy" style="text-align: center">Description<span style="color: red">*</span></h3>
+        <h3 ion-text color="white" style="text-align: center">Please use the same reference used in bank transfer</h3>
+        <ion-textarea myInput type="text" placeholder="Enter Reference" style="background-color: rgb(61, 61, 84)" 
+        [(ngModel)]="userData.package_description" formControlName="package_description" [class.error1]="!paymentform.controls.package_description.valid && paymentform.controls.package_description.dirty">
+      </ion-textarea>
+     
+          <div class="error" *ngIf="paymentform.get('package_description').hasError('required') && paymentform.get('package_description').touched">
+            Please enter Description
+          </div>
+         
+            <h3 ion-text color="yyy" style="text-align: center">Upload Payment Document</h3>
+            <h3 ion-text color="white" style="text-align: center">Alternatively you can provide the screenshot of the bank transfer</h3>
+            <ion-item>
+                <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+             
+            </ion-item>
+            {{pathForImage(lastImage)}}
+                <div class="frgt-area">
+                    <button class="button-md-success" ion-button icon-left small (click)="presentActionSheet()">
+                      <ion-icon name="camera"></ion-icon>Select Image
+                    </button>
+                    <h2 [hidden]="lastImage !== null" class="error">No file Chosen</h2>
+                    <button class="button-md-success" ion-button round [disabled]="paymentform.invalid" (click)="payBank()" >Pay With Bank</button>
+                  </div>
+              </form>   
+    </ion-card>
+    </div>
+</ion-content>

@@ -1,0 +1,174 @@
+
+<ion-header>
+
+  <ion-navbar color="success" hideBackButton="true">
+      <ion-buttons style="float:left">
+          <button ion-button icon-only (click)="onOpenMenu()">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cc-content">
+    <ion-segment [(ngModel)]="category" color="success">
+      <ion-segment-button *ngFor="let category of dashboardCategory" value={{category.moduleName}} (click)="getProducts(category)">
+        {{category.moduleName}}
+      </ion-segment-button>
+    </ion-segment>
+    <ion-list *ngIf="type == 'purchaseHistory'">
+    <ion-col class="frgt-area3">   
+            <button ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+    </ion-col>
+      <ion-item class="rr-item">
+          <ion-row>
+              
+              <ion-col style="text-align: center">
+                <strong ion-text color="white">Price</strong>
+              </ion-col>
+              <ion-col style="text-align: center">
+                <strong ion-text color="white" >Purchased on</strong>
+              </ion-col>
+              <ion-col style="text-align: center">
+                  <strong ion-text color="white" >Action</strong>
+                </ion-col>
+            </ion-row>
+      </ion-item>
+    <ion-item *ngFor ="let purchase of purchaseHistory; let i = index">
+        <ion-row class="rr-row">
+            <ion-col style="text-align: center">
+              <h3>{{purchase.total_price}}</h3>
+            </ion-col>
+            <ion-col style="text-align: center">
+              <h3>{{purchase.order_purchase_date}}</h3>
+            </ion-col>
+            <ion-col class="frgt-area2">
+                
+                    <button  ion-button round color="success" (click)="viewPurchase(purchase)">View</button><br/>
+               
+            </ion-col>
+          </ion-row>
+    </ion-item>
+      
+    </ion-list>
+    <ion-list class="mm-xx" *ngIf="type == 'myBookings'">
+        <ion-col class="frgt-area3">   
+            <button  ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+    </ion-col>
+  
+  <ion-list class="list-on">
+    <ion-item class="book_item">
+      <h2 ion-text color="success"> Booking History</h2>
+    </ion-item>
+      <ion-item class="rr-item">
+          <ion-row>
+              
+            
+                <h5 ion-text color="white">Remaining Session</h5>
+        
+              
+                <h5 ion-text color="white" >Future Booking</h5>
+            
+             
+                  <h5 ion-text color="white" >Canclled Booking</h5>
+                
+            </ion-row>
+      </ion-item>
+      <ion-item >
+          <ion-row class="rr-row">
+              <ion-col style="text-align: center">
+                <h3>{{bookingHistory.remainingSession}}</h3>
+              </ion-col>
+              <ion-col style="text-align: center">
+                <h3>{{bookingHistory.futureBooking}}</h3>
+              </ion-col>
+              <ion-col style="text-align: center">
+                  <h3>{{bookingHistory.cancleBooking}}</h3>
+                </ion-col>
+            </ion-row>
+      </ion-item>
+    </ion-list>
+    <ion-list > 
+      
+        <ion-item class="book_item">
+            <ion-label ion-text color="success">Booking State</ion-label>
+                     
+            <ion-select (ionChange)="myBookings($event)" >
+              <ion-option  value="future_booking" selected><span ion-text color="white">Future Booking</span></ion-option>
+              <ion-option ion-text color="white"  value="cancelled_booking"><span ion-text color="white">Cancelled Booking </span></ion-option>
+              <ion-option  ion-text color="white" value="past_booking"><span ion-text color="white">Past Booking</span></ion-option>
+            </ion-select>
+        </ion-item>
+        
+        <ion-item class="rr-item">
+            <ion-row>
+                <ion-col style="text-align: center">
+                  <h5 ion-text color="white">Booking Date</h5>
+                </ion-col>
+                  <ion-col style="text-align: center">
+                  <h5 ion-text color="white" >Booking Time</h5>
+                </ion-col>
+                  <ion-col style="text-align: center">
+                    <h5 ion-text color="white" >Action</h5>
+                  </ion-col>
+              </ion-row>
+        </ion-item>
+        <div *ngIf="undefined !== allBookings && allBookings.length">
+        <ion-item *ngFor ="let bookings of allBookings; let i = index">
+            <ion-row class="rr-row">
+                <ion-col style="text-align: center">
+                  <h3>{{bookings.plan_date | date : "MMM d, y"}}</h3>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <h3>{{bookings.plan_st_time }} to {{bookings.plan_end_time}}</h3>
+                </ion-col>
+                <ion-col class="frgt-area2">
+                
+                    <button  ion-button round color="success" (click)="viewBookings(bookings)">View</button>
+                    <button *ngIf="bookingas && bookings.cancel_flg == 1" ion-button round color="success" (click)="cancle(bookings.booking_id)">cancel</button>
+                    <button *ngIf="bookingas && bookings.cancel_flg == 0" ion-button round color="success" (click)="notCancle()">cancel</button>
+            </ion-col>
+              </ion-row>
+        </ion-item>
+        </div>
+      <div *ngIf ="allBookings && !allBookings.length">
+       <p>No Data Found</p>
+      </div>
+    </ion-list>
+    </ion-list>
+    <ion-list *ngIf="type == 'myMOT'" >
+        <ion-item class="kk-item">
+            <ion-row>
+                <ion-col style="text-align: center">
+                  <strong ion-text color="white">Trainer Name</strong>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <strong ion-text color="white">Measured On</strong>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <strong ion-text color="white" >Action</strong>
+                </ion-col>
+              </ion-row>
+        </ion-item>
+      <ion-item *ngFor ="let mot of motDetails; let i = index">
+          <ion-row class="rr-row">
+              <ion-col style="text-align: center">
+                <h3>{{mot.name}}</h3>
+              </ion-col>
+              <ion-col style="text-align: center">
+                <h3>{{mot.date}}</h3>
+              </ion-col>
+              <ion-col class="frgt-area2">
+                  
+                      <button  ion-button round color="success" (click)="viewMot(mot)">View</button><br/>
+                 
+              </ion-col>
+            </ion-row>
+      </ion-item>
+        
+      </ion-list>
+  </ion-content>
+  

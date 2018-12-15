@@ -1,0 +1,49 @@
+page-payments {
+.scroll-content{
+    background-color: #252631; 
+  }
+  .scroll-content ion-card{
+    background-color: transparent; 
+  }
+  .scroll-content ion-item{
+    background-color: transparent; 
+  }
+  .frgt-area2 {
+    text-align: center;
+    margin-top: 20px;
+}
+.button-md-success {
+    color: #fff;
+    background-color: #fb5b21;
+    width: 190px;
+    border: 2px solid #fff;
+}
+.wlcm-abc{
+    background: none;
+    padding-left: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+    color: #fff;
+}
+.wlcm-itm{
+    background: none;
+    padding-left: 0
+}
+.error {
+    color: rgb(223, 62, 62);
+    font-size: 11px;
+    text-align: center;
+  }
+  .frgt-area{
+    text-align: center;
+}
+.button-md-success {
+    color: #fff;
+    background-color: #fb5b21;
+    width: 190px;
+    border: 2px solid #fff;
+}
+.scroll-content form{
+    padding: 15px;
+}
+}

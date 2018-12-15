@@ -1,0 +1,63 @@
+
+<ion-header>
+    <ion-navbar color="success">
+      <ion-title>Bootcamp Session Booking</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content class="bb_session">
+    
+          <ion-list>
+              <form novalidate [formGroup]="seesionBookingForm"> 
+                   <ion-item>
+                      <ion-label>Address<span style="color: red">*</span></ion-label>
+                     <ion-input type="text"  [disabled]="true" value="{{bootAddress.address_line1}}">
+
+                     </ion-input>
+                      <!-- <ion-select [(ngModel)]="sessionData.address"  formControlName="address" >
+                        <ion-option   selected value="{{bootAddress.id}}"><strong text-wrap>{{bootAddress.address_line1}}</strong></ion-option>
+                      </ion-select> -->
+                  </ion-item> 
+                  <!-- <ion-item class="wlcm-abc">
+                      <ion-label><ion-icon color="white" name="mail"></ion-icon>   Email<span style="color: red">*</span></ion-label>
+                      <ion-input type="email" [(ngModel)]="userData.email"value="bbl18uk@gmail.com"
+                      formControlName="email"></ion-input>
+                    </ion-item> -->
+                  <!-- <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" seesionBookingForm.get('address').hasError('required')  || seesionBookingForm.get('address').touched">
+                    <div class="error" *ngIf="seesionBookingForm.get('address').hasError('required') && seesionBookingForm.get('address').touched">
+                      Please Select Any Address
+                    </div>
+                    
+                  </ion-item> -->
+                  <ion-item *ngIf="bootDate != null">
+                    <ion-label>Available Date<span style="color: red">*</span></ion-label>
+                    <ion-select [(ngModel)]="sessionData.availableDate"  formControlName="availableDate" (ionChange)="timeSelect($event)">
+                      <ion-option  *ngFor ="let date of bootDate; let i = index" value="{{date.plan_date}}">{{date.plan_date | date}}</ion-option>
+                    </ion-select>
+                </ion-item> 
+                <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" seesionBookingForm.get('availableDate').hasError('required')  || seesionBookingForm.get('availableDate').touched">
+                    <div class="error" *ngIf="seesionBookingForm.get('availableDate').hasError('required') && seesionBookingForm.get('availableDate').touched">
+                      Please Select Any Date
+                    </div>
+                    
+                  </ion-item>
+                <ion-item *ngIf="bootTime != null">
+                    <ion-label>Available Time<span style="color: red">*</span></ion-label>
+                    <ion-select [(ngModel)]="sessionData.availableTime" formControlName="availableTime">
+                      <ion-option  *ngFor ="let time of bootTime; let i = index" value="{{time.id}}">{{time.all_time}}</ion-option>
+                    </ion-select>
+                </ion-item> 
+                <ion-item  no-lines class="wlcm-itm" no-lines *ngIf=" seesionBookingForm.get('availableTime').hasError('required')  || seesionBookingForm.get('availableTime').touched">
+                    <div class="error" *ngIf="seesionBookingForm.get('availableTime').hasError('required') && seesionBookingForm.get('availableTime').touched">
+                      Please Select Any Time
+                    </div>
+                    
+                  </ion-item>
+                <div class="frgt-area2">
+                    <button class="button-md-success" ion-button round [disabled]="seesionBookingForm.invalid" (click)="addSession()">Add Session</button><br/>
+                </div>
+               </form>  
+          </ion-list>
+        
+</ion-content>
