@@ -6,9 +6,9 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class AuthServiceProvider {
   pageReset: boolean = false;
-   imageUrl: string = "http://192.168.1.110/bbl_app/public/backend/images/";
-   apiUrl: string = "http://192.168.1.201:5100/api/v1/";
-  // apiUrl: string = "http://192.168.1.110/bbl_app/public/api/v1/";
+   imageUrl: string = "http://192.168.1.201:5100/backend/images/";
+  apiUrl: string = "http://192.168.1.201:5100/api/v1/";
+  //apiUrl: string = "http://192.168.1.109/bbl_app/public/api/v1/";
   loading: Loading;
   constructor(public http: Http, private loadingCtrl: LoadingController) {
     console.log('Hello AuthServiceProvider');
@@ -69,7 +69,7 @@ export class AuthServiceProvider {
       this.http.post(this.apiUrl+type, credentials, {headers: headers})
         .subscribe(res => {
           this.loading.dismissAll();
-          console.log(res.json());
+          console.log(res);
           resolve(res.json());
         },
         (err) => {
@@ -137,7 +137,7 @@ export class AuthServiceProvider {
           resolve(res.json());
         },
         (err) => {
-          console.log(err.json());
+          console.log(err);
           reject(err);
         });
     });

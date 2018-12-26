@@ -8,6 +8,7 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ToastController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { FileUploadOptions, FileTransferObject, FileTransfer, FileUploadResult } from '@ionic-native/file-transfer';
+import { ImagePicker } from '@ionic-native/image-picker';
 declare var cordova: any;
 
 
@@ -28,12 +29,13 @@ export class PaymentsPage implements OnInit{
   targetPath = "";
   paymentform: FormGroup;
   lastImage: string = null;
+  lastImgPath: any = "";
   apiUrl: string = '';
   result : FileUploadResult = null;
   cardPaymentform: FormGroup;
   loading: Loading;
   cardData = {number: "", expMonth:  null,expYear: null ,cvc: "", amount: 0, currency: "gbp"};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController,
+  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController, public imagePicker: ImagePicker,
     private camera: Camera, public platform: Platform, private filePath: FilePath, private file: File, public toastCtrl: ToastController,
     private authService: AuthServiceProvider, private alertCtrl: AlertController,public stripe: Stripe,public loadingCtrl: LoadingController,
     private transfer: FileTransfer) {
@@ -60,7 +62,7 @@ export class PaymentsPage implements OnInit{
         number: new FormControl('', Validators.compose([Validators.required, Validators.minLength(16), Validators.maxLength(16)])),
         expMonth: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
         expYear: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]),
-        cvc: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
+        cvc: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(3)])),
       });
     
   }
@@ -157,6 +159,20 @@ export class PaymentsPage implements OnInit{
   //    alert.present();
   //   });
   // }
+  pickImage()
+  {
+    
+    
+    this.imagePicker.getPictures({maximumImagesCount:1, quality:100, outputType:0}).then
+    (results =>{
+      alert(results);
+      this.lastImgPath = results[0];
+        // this.images.push(results[i]);
+      alert(this.lastImgPath);
+    });
+  }
+
+
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -165,7 +181,7 @@ export class PaymentsPage implements OnInit{
         {
           text: 'Load from Library',
           handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+            this.pickImage();
           }
         },
         {
@@ -188,7 +204,7 @@ export class PaymentsPage implements OnInit{
     var options = {
       quality: 60,
       sourceType: sourceType,
-      saveToPhotoAlbum: false,
+      saveToPhotoAlbum: true,
       correctOrientation: true
     };
 
@@ -201,7 +217,7 @@ export class PaymentsPage implements OnInit{
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
             let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
             this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-            alert("correctPath"+correctPath);
+           alert("correctPath"+correctPath);
             alert("currentName"+currentName);
           });
       } else {
@@ -228,7 +244,8 @@ export class PaymentsPage implements OnInit{
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
-      alert("lastImg"+this.lastImage);
+      this.lastImgPath = this.pathForImage(this.lastImage);
+      alert("lastImgPath"+this.lastImgPath);
     }, error => {
       this.presentToast('Error while storing file.');
     });
@@ -260,10 +277,10 @@ export class PaymentsPage implements OnInit{
     this.targetPath = this.pathForImage(this.lastImage);
     this.userData.product_id = this.price.product_id;
     var data = this.userData;
-    alert("targetPath"+this.targetPath);
+    //alert("targetPath"+this.targetPath);
     if(this.targetPath != ""){
       data.filename = this.lastImage;
-      alert("filename"+this.lastImage);
+     // alert("filename"+this.lastImage);
       let headers = new Headers();
       headers.append('Authorization','Bearer '+ this.userPostData.token);
       console.log(headers);

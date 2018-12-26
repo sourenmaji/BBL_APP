@@ -12,15 +12,22 @@
 
 
 <ion-content>
-<ion-list>
+        <ion-segment [(ngModel)]="category" color="success">
+                <ion-segment-button *ngFor="let category of priceCategory" value={{category.moduleName}} (click)="getProducts(category)">
+                  {{category.moduleName}}
+                </ion-segment-button>
+              </ion-segment>
+ <ion-list *ngIf="type == 'bootcamp'">
      <ion-item>
            
-                <h1 ion-text color="primary" style="text-align: center">Chose Your Bootcamp Plan</h1> <br>
+                <h2 ion-text color="primary" style="text-align: center">Chose Your Bootcamp Plan</h2> <br>
                
                         <img src="assets/imgs/under-lie.png" class="logo"/>
                
     </ion-item>
-    <ion-item *ngFor ="let price of priceDetails; let i = index">
+
+    <ion-item *ngFor ="let price of bootcampPlan; let i = index">
+       
             <ion-card>
                    <ion-item class="half-batch">
                         <div class="plan-batch bch-3" ion-text color="white">{{price.training_name}}</div>
@@ -32,7 +39,61 @@
                           </ion-row>
                           <ion-row >
                             <ion-col col-auto style="width: 100%;text-align: center">
-                              <ion-badge  color="white" class="badge"><ion-icon small name="logo-usd"></ion-icon>{{price.total_price}}</ion-badge>
+                              <ion-badge  color="white" class="badge">£{{price.total_price}}</ion-badge>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                                <ion-col col-auto style="width: 100%;text-align: center">
+                                        <h2 ion-text color="yyy">{{price.payment_type_name}}</h2>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-auto style="width: 100%;text-align: center">
+                                        <h2 *ngIf="price.validity_duration != null" ion-text color="white">Contract-{{price.validity_duration}}</h2>
+                                        <h2 *ngIf="price.validity_duration == null" ion-text color="white">Contract-N/A</h2>
+                                </ion-col>
+                            </ion-row>
+                     
+                   </ion-item>
+                   <img src="assets/imgs/arrow.png" class="barrow"/>
+                   <ion-item class="another-half-batch">
+                
+                        <ion-row >
+                            <ion-col col-auto style="width: 100%;text-align: center">
+                              <h1 ion-text color="green">{{price.total_sessions}} Sessions</h1>
+                          </ion-col>
+                          </ion-row>
+                          <div class="frgt-area">
+                                <button class="subs" ion-button round (click)="subscribe(price)">Subscribe</button>
+                         </div>
+                   </ion-item>
+          
+                </ion-card>
+    </ion-item>
+</ion-list>
+<ion-list *ngIf="type == 'personalTraining'">
+        <ion-item>
+           
+                <h2 ion-text color="primary" style="text-align: center">Chose Your Personal Training Plan</h2> <br>
+               
+                        <img src="assets/imgs/under-lie.png" class="logo"/>
+               
+    </ion-item>
+
+    <ion-item *ngFor ="let price of ptPlan; let i = index">
+       
+            <ion-card>
+                   <ion-item class="half-batch">
+                        <div class="plan-batch bch-3" ion-text color="white">PT Plan</div>
+                        <ion-row >
+                            <ion-col col-auto style="width: 100%">
+                              <h2 *ngIf="price.validity_duration != null" ion-text color="white" style="text-align: center">{{price.validity_duration}} DAYS</h2>
+                              <h2 *ngIf="price.validity_duration == null" ion-text color="white" style="text-align: center">VALIDITY N/A</h2>
+                          </ion-col>
+                          </ion-row>
+                          <ion-row >
+                            <ion-col col-auto style="width: 100%;text-align: center">
+                              <ion-badge  color="white" class="badge">£{{price.total_price}}</ion-badge>
                             </ion-col>
                         </ion-row>
                         <ion-row>

@@ -1,3 +1,4 @@
+import { PricingPage } from './../pricing/pricing';
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
 import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
@@ -13,13 +14,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class BootcampSessionPage implements OnInit{
   
   seesionBookingForm: FormGroup;
-  sessionData = { availableDate: "",availableTime: ""};
+  sessionData = { availableDate: "",availableTime: "",address: ""};
   responseData: any;
-  bootAddress = "";
+  bootAddress: any;
   userDetails: any;
   userPostData = {"user":"","token":""};
   bootDate: any;
   bootTime: any;
+  addressLine1: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public authService: AuthServiceProvider,
               public alertCtrl: AlertController) {
                 const data = JSON.parse(localStorage.getItem('userData'));
@@ -27,6 +29,10 @@ export class BootcampSessionPage implements OnInit{
                 console.log(this.userDetails);
                 this.userPostData.user = this.userDetails;
                 this.userPostData.token = data.token;
+                this.bootAddress = this.navParams.get('address');
+                this.addressLine1 = this.bootAddress.address_line1;
+               // console.log(this.purchase);
+                this.bootDate = this.navParams.get('date');
   }
   ngOnInit() {
     this.seesionBookingForm = new FormGroup({
@@ -35,46 +41,11 @@ export class BootcampSessionPage implements OnInit{
       availableTime: new FormControl('', [Validators.required]),
     });
   }
-  ionViewWillEnter(){
-    this.openAddress();
-  }
+  // ionViewWillEnter(){
+  //   this.openAddress();
+  // }
   //for getting address
-  openAddress(){
-    let loader = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    loader.present();
-    this.authService.getData('booking-bootcamp', this.userPostData.token).then((result) => {
-      loader.dismiss();
-      this.responseData = result;
 
-      if(this.responseData.status == true)
-      {
-      console.log(this.responseData.bootcampaddress);
-
-      const value = this.responseData.bootcampaddress;
-      const valu1 = this.responseData.date_details;
-      console.log(valu1);
-      this.bootAddress = value;
-      this.bootDate = valu1;
-      }
-      else{
-       const alert = this.alertCtrl.create({
-        title: 'Failure',
-         subTitle: this.responseData.message,
-         buttons: ['OK']
-       })
-       alert.present();
-       
-      
-     }
-    },
-    (err) => {
-      loader.dismiss();
-     this.responseData = err.json();
-     console.log(this.responseData);
-    });
-  }
   //for getting date
   // onSelectChange(selectedValue: any){
   //   console.log(selectedValue);
@@ -108,7 +79,7 @@ export class BootcampSessionPage implements OnInit{
   // }
 //for getting time
   timeSelect(timeValue: any){
-   
+   console.log(timeValue);
     this.authService.authData({bootcamp_date  :timeValue},'get_bootcamp_time', this.userPostData.token).then((result) => {
      
       this.responseData = result;
@@ -132,19 +103,22 @@ export class BootcampSessionPage implements OnInit{
     },
     (err) => {
       
-     this.responseData = err.json();
+     this.responseData = err;
      console.log(this.responseData)
     });
   }
   //add session
   addSession(){
     console.log(this.sessionData);
-    this.authService.authData({schedule_id :this.sessionData.availableTime},'bootcamp-booking', this.userPostData.token).then((result) => {
+    console.log(this.addressLine1);
+    this.sessionData.address = this.addressLine1;
+    this.authService.authData(this.sessionData,'bootcamp-booking', this.userPostData.token).then((result) => {
      
       this.responseData = result;
 
       if(this.responseData.status == true)
       {
+        if(this.responseData.flag == 1){
         this.authService.pageReset = true;
         this.navCtrl.pop();
         const alert = this.alertCtrl.create({
@@ -153,7 +127,16 @@ export class BootcampSessionPage implements OnInit{
            buttons: ['OK']
          })
          alert.present();
-
+        }else if(this.responseData.flag == 0){
+          this.authService.pageReset = true;
+          this.navCtrl.pop();
+          const alert = this.alertCtrl.create({
+            title: 'Success',
+             subTitle: "You don't have any bootcamp session",
+             buttons: ['OK']
+           })
+           alert.present();
+        }
       }
       else{
        const alert = this.alertCtrl.create({
@@ -166,7 +149,7 @@ export class BootcampSessionPage implements OnInit{
     },
     (err) => {
       
-     this.responseData = err.json();
+     this.responseData = err;
      console.log(this.responseData)
     });
   }

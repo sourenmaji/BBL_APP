@@ -33,6 +33,9 @@
                 <strong ion-text color="white" >Purchased on</strong>
               </ion-col>
               <ion-col style="text-align: center">
+                <strong ion-text color="white" >Type</strong>
+              </ion-col>
+              <ion-col style="text-align: center">
                   <strong ion-text color="white" >Action</strong>
                 </ion-col>
             </ion-row>
@@ -44,6 +47,10 @@
             </ion-col>
             <ion-col style="text-align: center">
               <h3>{{purchase.order_purchase_date}}</h3>
+            </ion-col>
+            <ion-col style="text-align: center">
+              <h3 *ngIf="purchase.training_name == 'Personal Training'">PT</h3>
+              <h3 *ngIf="purchase.training_name == 'Bootcamp'">Bootcamp</h3>
             </ion-col>
             <ion-col class="frgt-area2">
                 
@@ -63,20 +70,20 @@
     <ion-item class="book_item">
       <h2 ion-text color="success"> Booking History</h2>
     </ion-item>
-      <ion-item class="rr-item">
+      <ion-grid class="rr-item">
           <ion-row>
               
             
-                <h5 ion-text color="white">Remaining Session</h5>
+                <ion-col ion-text color="white">Remaining Session</ion-col>
         
               
-                <h5 ion-text color="white" >Future Booking</h5>
+                <ion-col ion-text color="white" >Future Booking</ion-col>
             
              
-                  <h5 ion-text color="white" >Canclled Booking</h5>
-                
+                  <ion-col ion-text color="white" >Cancelled Booking</ion-col>
+                  <ion-col ion-text color="white" >Type</ion-col>
             </ion-row>
-      </ion-item>
+      </ion-grid>
       <ion-item >
           <ion-row class="rr-row">
               <ion-col style="text-align: center">
@@ -87,6 +94,9 @@
               </ion-col>
               <ion-col style="text-align: center">
                   <h3>{{bookingHistory.cancleBooking}}</h3>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <h3>Bootcamp</h3>
                 </ion-col>
             </ion-row>
       </ion-item>
@@ -169,6 +179,15 @@
             </ion-row>
       </ion-item>
         
+      </ion-list>
+      <ion-list *ngIf="type == 'freeBootcamp'" class="freee_session">
+        <ion-item>
+<h1 style="text-transform: capitalize" ion-text color="white">Free bootcamp session for you</h1>
+<h2 style="text-transform: capitalize" ion-text color="white">You have {{freeBootDetails}} free remaining session </h2>
+<ion-col class="frgt-area3">   
+  <button ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+</ion-col>
+</ion-item>
       </ion-list>
   </ion-content>
   

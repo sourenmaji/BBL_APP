@@ -35,18 +35,18 @@
               formControlName="expMonth">
               </ion-input> -->
               <ion-select [(ngModel)]="cardData.expMonth" formControlName="expMonth">
-                <ion-option value="01">01</ion-option>
-                <ion-option value="02">02</ion-option>
-                <ion-option value="03">03</ion-option>
-                <ion-option value="04">04</ion-option>
-                <ion-option value="05">05</ion-option>
-                <ion-option value="06">06</ion-option>
-                <ion-option value="07">07</ion-option>
-                <ion-option value="08">08</ion-option>
-                <ion-option value="09">09</ion-option>
-                <ion-option value="10">10</ion-option>
-                <ion-option value="11">11</ion-option>
-                <ion-option value="12">12</ion-option>
+                <ion-option value="01">Jan(01)</ion-option>
+                <ion-option value="02">Feb(02)</ion-option>
+                <ion-option value="03">Mar(03)</ion-option>
+                <ion-option value="04">Apr(04)</ion-option>
+                <ion-option value="05">May(05)</ion-option>
+                <ion-option value="06">June(06)</ion-option>
+                <ion-option value="07">July(07)</ion-option>
+                <ion-option value="08">Aug(08)</ion-option>
+                <ion-option value="09">Sep(09)</ion-option>
+                <ion-option value="10">Oct(10)</ion-option>
+                <ion-option value="11">Nov(11)</ion-option>
+                <ion-option value="12">Dec(12)</ion-option>
               </ion-select>
             </ion-item>
             
@@ -94,21 +94,21 @@
                     <div class="error" *ngIf="cardPaymentform.get('expYear').hasError('required') && cardPaymentform.get('expYear').touched">
                      Please enter card expiration Year
                     </div>
-                    <div class="error" *ngIf="((cardPaymentform.get('expYear').hasError('minlength') && cardPaymentform.get('expYear').touched) || cardPaymentform.get('expYear').hasError('maxLength') && cardPaymentform.get('expYear').touched) ">
+                    <div class="error" *ngIf="((cardPaymentform.get('expYear').hasError('minlength') && cardPaymentform.get('expYear').touched) || cardPaymentform.get('expYear').hasError('maxlength') && cardPaymentform.get('expYear').touched) ">
                           This value should be 2 digit.
                     </div>
                   </ion-item>
                   <ion-item class="wlcm-abc">
-                        <ion-label>CVV <span style="color: red">*</span></ion-label>
+                        <ion-label>CVV/CVC <span style="color: red">*</span></ion-label>
                         <ion-input type="Number"  [(ngModel)]="cardData.cvc"  clearOnEdit="false" placeholder="CVV"
                         formControlName="cvc"></ion-input>
                    </ion-item>
                       
                    <ion-item class="wlcm-itm" *ngIf="( cardPaymentform.get('cvc').hasError('minlength') || cardPaymentform.get('cvc').hasError('maxlength') ||cardPaymentform.get('cvc').hasError('required') )">
                         <div class="error" *ngIf="cardPaymentform.get('cvc').hasError('required') && cardPaymentform.get('cvc').touched">
-                         Please enter card CVV
+                         Please enter card CVV/CVC
                         </div>
-                        <div class="error" *ngIf="((cardPaymentform.get('cvc').hasError('minlength') && cardPaymentform.get('cvc').touched) || cardPaymentform.get('cvc').hasError('maxLength') && cardPaymentform.get('cvc').touched)">
+                        <div class="error" *ngIf="((cardPaymentform.get('cvc').hasError('minlength') && cardPaymentform.get('cvc').touched) || cardPaymentform.get('cvc').hasError('maxlength') && cardPaymentform.get('cvc').touched)">
                               This value should be 3 digit.
                         </div>
                         
@@ -134,7 +134,7 @@
         
             <h3 ion-text color="yyy" style="text-align: center">Description<span style="color: red">*</span></h3>
         <h3 ion-text color="white" style="text-align: center">Please use the same reference used in bank transfer</h3>
-        <ion-textarea myInput type="text" placeholder="Enter Reference" style="background-color: rgb(61, 61, 84)" 
+        <ion-textarea myInput type="text" placeholder="Enter Reference" style="background-color: rgb(61, 61, 84); text-align: center" 
         [(ngModel)]="userData.package_description" formControlName="package_description" [class.error1]="!paymentform.controls.package_description.valid && paymentform.controls.package_description.dirty">
       </ion-textarea>
      
@@ -145,10 +145,12 @@
             <h3 ion-text color="yyy" style="text-align: center">Upload Payment Document</h3>
             <h3 ion-text color="white" style="text-align: center">Alternatively you can provide the screenshot of the bank transfer</h3>
             <ion-item>
-                <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+                
+                <img src={{lastImgPath}} style="width: 100%" [hidden]="lastImgPath === null">
+                <!-- <textarea>{{lastImgPath}}</textarea> -->
              
             </ion-item>
-            {{pathForImage(lastImage)}}
+           
                 <div class="frgt-area">
                     <button class="button-md-success" ion-button icon-left small (click)="presentActionSheet()">
                       <ion-icon name="camera"></ion-icon>Select Image

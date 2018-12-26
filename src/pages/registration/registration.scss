@@ -93,8 +93,8 @@ page-registration {
     }
     .bg-cir button{
         background: #fff;
-        height: 25px;
-        width: 25px;
+        height: 35px;
+        width: 35px;
         border-radius: 50%;
         line-height: 25px;
         text-align: center;
@@ -172,9 +172,9 @@ page-registration {
 }
 .bg-cir span.button-inner {
     position: absolute;
-    top: -7px;
-    left: -3.5px;
-    text-align: center;
+        top: -1px;
+        left: -2.5px;
+        text-align: center;
 }
 .wlcm-crd span.button-inner {
     display: inline-block;
@@ -205,4 +205,9 @@ span.nw-bb.lg-with {
     width: 24px;
     font-size: 24px;
 }
-    }
+.button-small-md {
+    height: 2.1em;
+    font-size: 1.6rem;
+    padding: 0 0.9em;
+}
+}

@@ -54,6 +54,9 @@ export class ExercisePage {
         const value = this.responseData.exercises;
         this.exerciseDetails = value;
   
+        this.exerciseDetails.forEach(element => {
+          element.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.video);
+        });
         }
         else{
          const alert = this.alertCtrl.create({

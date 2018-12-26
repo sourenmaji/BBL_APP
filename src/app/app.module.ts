@@ -1,3 +1,4 @@
+
 import { ViewBookingsPage } from './../pages/view-bookings/view-bookings';
 import { ViewbootcampPurchasePage } from './../pages/viewbootcamp-purchase/viewbootcamp-purchase';
 import { SuccessPage } from './../pages/success/success';
@@ -6,7 +7,6 @@ import { PaymentsPage } from './../pages/payments/payments';
 import { PricingSubscribePage } from './../pages/pricing-subscribe/pricing-subscribe';
 import { ViewMotPage } from './../pages/view-mot/view-mot';
 import { ChangePasswordPage } from './../pages/change-password/change-password';
-import { HTTP } from '@ionic-native/http';
 import { ServicePage } from './../pages/service/service';
 import { TestimonialsPage } from './../pages/testimonials/testimonials';
 import { PricingPage } from './../pages/pricing/pricing';
@@ -35,6 +35,10 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { FilePath } from '@ionic-native/file-path';
 import { BootcampSessionPage } from '../pages/bootcamp-session/bootcamp-session';
 import { Stripe } from '@ionic-native/stripe';
+import { AgmCoreModule } from '@agm/core';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { ImagePicker } from '../../node_modules/@ionic-native/image-picker'
 @NgModule({
   declarations: [
     MyApp,
@@ -65,6 +69,9 @@ import { Stripe } from '@ionic-native/stripe';
     TruncateModule,
     NgxDatatableModule,
     IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDDK5MydVx-HkNyQcPTBdDyIyrqbwVPST0'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -99,7 +106,10 @@ import { Stripe } from '@ionic-native/stripe';
     File,
     FileTransfer,
   FileTransferObject,
-  Stripe
+  Stripe,
+  Facebook,
+  GooglePlus,
+  ImagePicker
   ]
 })
 export class AppModule {}

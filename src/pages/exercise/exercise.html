@@ -23,8 +23,9 @@
        <ion-item *ngFor ="let exercise of exerciseDetails; let i = index">
        <ion-card>
        <ion-item class="ss-iframe" *ngIf="exercise.video != null">
-          <iframe  [src]="updateVideoUrl(exercise.video)" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </ion-item> 
+        <!-- <iframe  [src]="updateVideoUrl(exercise.video)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe> -->
+        <iframe  [src]="exercise.safeUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+      </ion-item> 
        <ion-item class="box-image" *ngIf="exercise.image != null">
         <img src="{{this.imageUrl+exercise.image}}">
       </ion-item>

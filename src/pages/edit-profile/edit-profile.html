@@ -74,7 +74,7 @@
                        
                         <ion-item>
                             <ion-label ><ion-icon color="grey" name="locate"></ion-icon>Address</ion-label>
-                            <ion-textarea myInput type="text" value="{{userDetails.address}}" [(ngModel)]="userData.address" formControlName="address"></ion-textarea>
+                            <ion-textarea myInput type="text" value="{{userDetails.address}}" [(ngModel)]="userData.address" (keyup)="loadMap()" id="txtHome"formControlName="address"></ion-textarea>
                           </ion-item>
                           <div class="frgt-area2">
                           <button  ion-button round color="success"  [disabled]="editform.invalid" (click)="updateProfile()">Save</button><br/>

@@ -128,15 +128,15 @@
                     
           <ion-row>
             <ion-col class="bg-cir">
-              <button ion-button small icon-only>
+              <button ion-button small icon-only (click)="loginWithFb()">
                 <ion-icon  name="logo-facebook" color="primary" ></ion-icon>
               </button>
               <button ion-button  small clear icon-only >
-                <ion-icon name="logo-googleplus" color="danger" ></ion-icon>
+                <ion-icon name="logo-googleplus" color="danger" (click)="loginWithGoogle()"></ion-icon>
               </button>
-              <button ion-button  small clear icon-only >
+              <!-- <button ion-button  small clear icon-only >
                 <ion-icon name="logo-instagram" color="primary" ></ion-icon>
-              </button>
+              </button> -->
             </ion-col>
           </ion-row>
 

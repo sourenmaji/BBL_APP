@@ -32,7 +32,7 @@ page-dashbord {
         padding: 0px 1.6rem;
         font-size: 0.80rem;
     }
-    .rr-item h5 {
+    .rr-item ion-col {
         font-size: 13px;
         margin-right: 15px;
     }
@@ -56,5 +56,27 @@ page-dashbord {
     }
     .list-on {
         margin-bottom: 30px;
+    }
+    .freee_session {
+        background-image: url(../../assets/imgs/free_bootcamp.jpg);
+        background-size: cover;
+        background-position: center top;
+        width: 100%;
+        height: 84.8vh;
+        position: relative;
+        margin-bottom: 0;
+   }
+    .freee_session ion-item {
+        position: absolute;
+        bottom: 95px;
+        background: none !important;
+        padding-left: 0;
+        text-align: center;
+    }
+    .freee_session ion-label {
+        margin-right: 0;
+    }
+    .freee_session div.item-inner{
+        padding-right: 0 !important;
     }
 }
