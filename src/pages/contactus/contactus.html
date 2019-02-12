@@ -40,76 +40,76 @@
           <form novalidate  [formGroup]="contactusform">
               <ion-item class="wlcm-abc">
                 <ion-label ><ion-icon color="white" name="contact"></ion-icon>Username <span style="color: red">*</span></ion-label>
-                <ion-input type="text" [(ngModel)]="userData.name"
-                formControlName="name" [class.error1]="!contactusform.controls.name.valid && contactusform.controls.name.dirty"></ion-input>
+                <ion-input type="text" [(ngModel)]="userData.user_name" ion-text color="white"
+                formControlName="user_name" [class.error1]="!contactusform.controls.user_name.valid && contactusform.controls.user_name.dirty"></ion-input>
               </ion-item>
-              <ion-item class="wlcm-itm" no-lines *ngIf="( contactusform.get('name').hasError('minlength') || contactusform.get('name').hasError('maxlength') ||contactusform.get('name').hasError('pattern') ||contactusform.get('name').hasError('required') ) && contactusform.get('name').touched">
-                <div class="error" *ngIf="contactusform.get('name').hasError('required') && contactusform.get('name').touched">
+              <ion-item class="wlcm-itm" no-lines *ngIf="( contactusform.get('user_name').hasError('minlength') || contactusform.get('user_name').hasError('maxlength') ||contactusform.get('user_name').hasError('pattern') ||contactusform.get('user_name').hasError('required') ) && contactusform.get('user_name').touched">
+                <div class="error" *ngIf="contactusform.get('user_name').hasError('required') && contactusform.get('user_name').touched">
                   Please enter your name
                 </div>
-                <div class="error" *ngIf="contactusform.get('name').hasError('minlength') && contactusform.get('name').touched">
+                <div class="error" *ngIf="contactusform.get('user_name').hasError('minlength') && contactusform.get('user_name').touched">
                   Minimum 4 characters
                 </div>
-                <div class="error" *ngIf="contactusform.get('name').hasError('maxlength') && contactusform.get('name').touched">
+                <div class="error" *ngIf="contactusform.get('user_name').hasError('maxlength') && contactusform.get('user_name').touched">
                   Maximum 30 characters
                 </div>
-                <div class="error" *ngIf="contactusform.get('name').hasError('pattern') && contactusform.get('name').touched">
+                <div class="error" *ngIf="contactusform.get('user_name').hasError('pattern') && contactusform.get('user_name').touched">
                   pattern Your name must contain alphabets and spaces only
                 </div>
               </ion-item>
               
               <ion-item class="wlcm-abc">
                 <ion-label ><ion-icon color="white" name="mail"></ion-icon>Email<span style="color: red">*</span></ion-label>
-                <ion-input type="email" [(ngModel)]="userData.user"
-                formControlName="user" [class.error1]="!contactusform.controls.user.valid && contactusform.controls.user.dirty">
+                <ion-input type="email" [(ngModel)]="userData.user_email" ion-text color="white"
+                formControlName="user_email" [class.error1]="!contactusform.controls.user_email.valid && contactusform.controls.user_email.dirty">
                 </ion-input>
               </ion-item>
-              <ion-item class="wlcm-itm" no-lines *ngIf="( contactusform.get('user').hasError('minlength') || contactusform.get('user').hasError('pattern') ||contactusform.get('user').hasError('required') ) && contactusform.get('user').touched">
-                <div class="error" *ngIf="contactusform.get('user').hasError('required') && contactusform.get('user').touched">
+              <ion-item class="wlcm-itm" no-lines *ngIf="( contactusform.get('user_email').hasError('minlength') || contactusform.get('user_email').hasError('pattern') ||contactusform.get('user_email').hasError('required') ) && contactusform.get('user_email').touched">
+                <div class="error" *ngIf="contactusform.get('user_email').hasError('required') && contactusform.get('user_email').touched">
                   Please enter your email
                 </div>
-                <div class="error" *ngIf="contactusform.get('user').hasError('pattern') && contactusform.get('user').touched">
+                <div class="error" *ngIf="contactusform.get('user_email').hasError('pattern') && contactusform.get('user_email').touched">
                   This value should be a valid email
                 </div>
               </ion-item>
               <ion-item class="wlcm-abc">
                 <ion-label><ion-icon color="white" name="book"></ion-icon>Subject <span style="color: red">*</span></ion-label>
-                <ion-input type="text" [(ngModel)]="userData.subject"
-                formControlName="subject" [class.error1]="!contactusform.controls.subject.valid && contactusform.controls.subject.dirty"></ion-input>
+                <ion-input type="text" [(ngModel)]="userData.user_subject" ion-text color="white"
+                formControlName="user_subject" [class.error1]="!contactusform.controls.user_subject.valid && contactusform.controls.user_subject.dirty"></ion-input>
               </ion-item>
-              <ion-item class="wlcm-itm" no-lines *ngIf="(contactusform.get('subject').hasError('required') && contactusform.get('subject').touched)">
-                <div class="error" *ngIf="contactusform.get('subject').hasError('required') && contactusform.get('subject').touched">
+              <ion-item class="wlcm-itm" no-lines *ngIf="(contactusform.get('user_subject').hasError('required') && contactusform.get('user_subject').touched)">
+                <div class="error" *ngIf="contactusform.get('user_subject').hasError('required') && contactusform.get('user_subject').touched">
                  Please enter your Subject
                 </div>
                 
               </ion-item>
               <ion-item class="wlcm-abc">
                 <ion-label><ion-icon color="white" name="call"></ion-icon>Phone <span style="color: red">*</span></ion-label>
-                <ion-input type="number" [(ngModel)]="userData.phone"
-                formControlName="phone" [class.error1]="!contactusform.controls.phone.valid && contactusform.controls.phone.dirty"></ion-input>
+                <ion-input type="number" [(ngModel)]="userData.user_phone" ion-text color="white"
+                formControlName="user_phone" [class.error1]="!contactusform.controls.user_phone.valid && contactusform.controls.user_phone.dirty"></ion-input>
               </ion-item>
-              <ion-item class="wlcm-itm" no-lines *ngIf="((( contactusform.get('phone').hasError('minlength') || contactusform.get('phone').hasError('maxlength')) || contactusform.get('phone').hasError('pattern')) ||contactusform.get('phone').hasError('required') ) && contactusform.get('phone').touched">
-                <div class="error" *ngIf="contactusform.get('phone').hasError('required') && contactusform.get('phone').touched">
+              <ion-item class="wlcm-itm" no-lines *ngIf="((( contactusform.get('user_phone').hasError('minlength') || contactusform.get('user_phone').hasError('maxlength')) || contactusform.get('user_phone').hasError('pattern')) ||contactusform.get('user_phone').hasError('required') ) && contactusform.get('user_phone').touched">
+                <div class="error" *ngIf="contactusform.get('user_phone').hasError('required') && contactusform.get('user_phone').touched">
                   Please enter your Phone
                 </div>
-                <div class="error" *ngIf="contactusform.get('phone').hasError('minlength') && contactusform.get('phone').touched">
+                <div class="error" *ngIf="contactusform.get('user_phone').hasError('minlength') && contactusform.get('user_phone').touched">
                   This value is too short. It should have 10 characters or more
                 </div>
-                <div class="error" *ngIf="contactusform.get('phone').hasError('maxlength') && contactusform.get('phone').touched">
+                <div class="error" *ngIf="contactusform.get('user_phone').hasError('maxlength') && contactusform.get('user_phone').touched">
                   This value is too long. It should have 12 characters.
                 </div>
-                <div class="error" *ngIf="contactusform.get('phone').hasError('pattern') && contactusform.get('phone').touched">
+                <div class="error" *ngIf="contactusform.get('user_phone').hasError('pattern') && contactusform.get('user_phone').touched">
                     This value should be a valid Phone
                 </div>
               </ion-item>
               <ion-item class="wlcm-abc">
                   <ion-label><ion-icon color="white" name="chatboxes"></ion-icon>Message</ion-label>
-                  <ion-textarea type="text" [(ngModel)]="userData.message"
+                  <ion-textarea type="text" [(ngModel)]="userData.message" ion-text color="white"
                   formControlName="message" ></ion-textarea>
               </ion-item>
                 
               <div class="frgt-area">
-              <button class="button-md-success" ion-button round [disabled]="contactusform.invalid" (click)="register()">Send</button>
+              <button class="button-md-success" ion-button round [disabled]="contactusform.invalid" (click)="contactUs()">Send</button>
               
             </div>  
             </form>

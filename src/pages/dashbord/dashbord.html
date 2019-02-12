@@ -21,7 +21,14 @@
     </ion-segment>
     <ion-list *ngIf="type == 'purchaseHistory'">
     <ion-col class="frgt-area3">   
-            <button ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+            <button class="fff-butto" ion-button round  (click)="openBootcampSession()">Book Bootcamp Session</button>
+            <ion-item class="book_pt">
+              <ion-label ion-text color="white">Book PT Session</ion-label>
+              <ion-select (ionChange)="bookPt($event)" >
+                <ion-option  value="book_by_time" ><span ion-text color="white">Book By Time</span></ion-option>
+                <ion-option   value="book_by_trainer"><span ion-text color="white">Book By Trainer </span></ion-option>
+              </ion-select>
+          </ion-item>
     </ion-col>
       <ion-item class="rr-item">
           <ion-row>
@@ -63,7 +70,16 @@
     </ion-list>
     <ion-list class="mm-xx" *ngIf="type == 'myBookings'">
         <ion-col class="frgt-area3">   
-            <button  ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+            <button  ion-button round color="success" (click)="openBootcampSession()">Book Bootcamp Session</button>
+            <!-- <button  ion-button round color="success" (click)="openBootcampSession()">Book PT Session</button> -->
+
+            <ion-item class="book_pt">
+              <ion-label ion-text color="white">Book PT Session</ion-label>
+              <ion-select (ionChange)="bookPt($event)" >
+                <ion-option  value="book_by_time" ><span ion-text color="white">Book By Time</span></ion-option>
+                <ion-option   value="book_by_trainer"><span ion-text color="white">Book By Trainer </span></ion-option>
+              </ion-select>
+          </ion-item>
     </ion-col>
   
   <ion-list class="list-on">
@@ -74,42 +90,63 @@
           <ion-row>
               
             
-                <ion-col ion-text color="white">Remaining Session</ion-col>
-        
-              
-                <ion-col ion-text color="white" >Future Booking</ion-col>
-            
-             
-                  <ion-col ion-text color="white" >Cancelled Booking</ion-col>
+                <ion-col ion-text color="white">Remaining session</ion-col>
+                <ion-col ion-text color="white" >Future booking</ion-col>
+                  <ion-col ion-text color="white" >Cancel booking</ion-col>
+                  <ion-col ion-text color="white" >Decline booking</ion-col>
                   <ion-col ion-text color="white" >Type</ion-col>
             </ion-row>
       </ion-grid>
-      <ion-item >
+      <ion-item class="bb_mm">
           <ion-row class="rr-row">
               <ion-col style="text-align: center">
-                <h3>{{bookingHistory.remainingSession}}</h3>
+                <h3>{{bootcampValue.no_of_sessions_bc}}</h3>
               </ion-col>
               <ion-col style="text-align: center">
-                <h3>{{bookingHistory.futureBooking}}</h3>
+                <h3>{{bootcampValue.total_future_booking_bc}}</h3>
               </ion-col>
               <ion-col style="text-align: center">
-                  <h3>{{bookingHistory.cancleBooking}}</h3>
+                  <h3>{{bootcampValue.total_cancelled_booking_bc}}</h3>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <h3>{{bootcampValue.total_declined_booking_bc}}</h3>
                 </ion-col>
                 <ion-col style="text-align: center">
                   <h3>Bootcamp</h3>
                 </ion-col>
             </ion-row>
-      </ion-item>
+            <ion-row class="rr-row">
+              <ion-col style="text-align: center">
+                <h3>{{ptSessionValue.total_sessions_pt}}</h3>
+              </ion-col>
+              <ion-col style="text-align: center">
+                <h3>{{ptSessionValue.total_future_booking_pt}}</h3>
+              </ion-col>
+              <ion-col style="text-align: center">
+                  <h3>{{ptSessionValue.total_cancelled_booking_pt}}</h3>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <h3>{{ptSessionValue.total_declined_booking_pt}}</h3>
+                </ion-col>
+                <ion-col style="text-align: center">
+                  <h3>PT</h3>
+                </ion-col>
+            </ion-row>
+          </ion-item>
     </ion-list>
     <ion-list > 
       
         <ion-item class="book_item">
-            <ion-label ion-text color="success">Booking State</ion-label>
-                     
-            <ion-select (ionChange)="myBookings($event)" >
+            <!-- <ion-label ion-text color="success">Booking State</ion-label> -->
+            <ion-select [(ngModel)]="bookingState.state" (ionChange)="myBookings()" >
+              <ion-option  value="bootcamp" selected><span ion-text color="white">Bootcamp</span></ion-option>
+              <ion-option ion-text color="white"  value="pt_session"><span ion-text color="white">Personal Training </span></ion-option>
+            </ion-select>        
+            <ion-select [(ngModel)]="bookingState.type" (ionChange)="myBookings()" >
               <ion-option  value="future_booking" selected><span ion-text color="white">Future Booking</span></ion-option>
               <ion-option ion-text color="white"  value="cancelled_booking"><span ion-text color="white">Cancelled Booking </span></ion-option>
               <ion-option  ion-text color="white" value="past_booking"><span ion-text color="white">Past Booking</span></ion-option>
+              <ion-option  ion-text color="white" value="declined_booking"><span ion-text color="white">Declined Booking</span></ion-option>
             </ion-select>
         </ion-item>
         

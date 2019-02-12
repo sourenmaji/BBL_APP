@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ExercisePage } from './exercise';
+import { TruncateModule } from '@yellowspot/ng-truncate';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ExercisePage } from './exercise';
   ],
   imports: [
     IonicPageModule.forChild(ExercisePage),
+    TruncateModule
   ],
 })
 export class ExercisePageModule {}

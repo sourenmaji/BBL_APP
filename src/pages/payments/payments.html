@@ -1,18 +1,18 @@
 
 <ion-header>
     <ion-navbar color="success">
-      <ion-title *ngIf="PayOptions.paymentOption == 'onlinePayment'">Stripe Payments</ion-title>
-      <ion-title *ngIf="PayOptions.paymentOption == 'bankTransfer'">Bank Transfer</ion-title>
+      <ion-title *ngIf="PayOptions == 'onlinePayment'">Stripe Payments</ion-title>
+      <ion-title *ngIf="PayOptions == 'bankTransfer'">Bank Transfer</ion-title>
     </ion-navbar>
   </ion-header>
 
 <ion-content class="scroll-content" >
   <div ion-fixed> 
-    <ion-card *ngIf="PayOptions.paymentOption == 'onlinePayment'" >
+    <ion-card *ngIf="PayOptions == 'onlinePayment'" >
             <form novalidate [formGroup]="cardPaymentform">
         <h1 ion-text color="success" style="text-align: center">PAY FROM HERE</h1><br>
         <h3 ion-text color="white" style="text-align: center">You can choose to pay by using online payment</h3><br>
-        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success"><ion-icon small name="logo-usd"></ion-icon>{{price.total_price}} </span></h3>
+        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success">£ {{price.total_price}} </span></h3>
         
         
         
@@ -124,12 +124,12 @@
       </ion-card>
    
     
-    <ion-card *ngIf="PayOptions.paymentOption == 'bankTransfer'" >
+    <ion-card *ngIf="PayOptions == 'bankTransfer'" >
         <form novalidate [formGroup]="paymentform">
         <h1 ion-text color="success" style="text-align: center">PAY FROM HERE</h1><br>
         <h3 ion-text color="yyy" style="text-align: center">Sort Code : <span ion-text color="white">23-69-72</span></h3><br>
         <h3 ion-text color="yyy" style="text-align: center">Account No : <span ion-text color="white">04449182</span></h3><br>
-        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success"><ion-icon small name="logo-usd"></ion-icon>{{price.total_price}} </span></h3>
+        <h3 ion-text color="white" style="text-align: center">Payable amount is <span style="text-align: center" ion-text color="success">£ {{price.total_price}} </span></h3>
         
         
             <h3 ion-text color="yyy" style="text-align: center">Description<span style="color: red">*</span></h3>
@@ -146,8 +146,8 @@
             <h3 ion-text color="white" style="text-align: center">Alternatively you can provide the screenshot of the bank transfer</h3>
             <ion-item>
                 
-                <img src={{lastImgPath}} style="width: 100%" [hidden]="lastImgPath === null">
-                <!-- <textarea>{{lastImgPath}}</textarea> -->
+                <img src={{lastImgPath}} >
+                 <!-- <textarea>{{lastImgPath}}</textarea>  -->
              
             </ion-item>
            

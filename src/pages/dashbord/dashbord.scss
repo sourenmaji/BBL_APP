@@ -20,21 +20,27 @@ page-dashbord {
     .cc-content ion-item:nth-of-type(2n+1) {
         background: #f7e6f4;
     }
+    .bb_mm ion-row:nth-of-type(2n) {
+        background: #f5f4f4;
+    }
+    .bb_mm ion-row:nth-of-type(2n+1) {
+        background: #f7e6f4;
+    }
     .frgt-area3 {
         text-align: center;
         width: 100%;
         display: block;
-        margin-top: 15px;
+        margin-top: 0px;
     }
     .frgt-area2 button {
-        width: 4px;
-        height: 12px;
-        padding: 0px 1.6rem;
-        font-size: 0.80rem;
+        width: 40px;
+        height: 21px;
+        padding: 0px 1.9rem;
+        font-size: 0.90rem;
     }
     .rr-item ion-col {
         font-size: 13px;
-        margin-right: 15px;
+        margin-right: 14px;
     }
     .rr-item h5:last-child{
         margin-right: 0;
@@ -47,15 +53,31 @@ page-dashbord {
         background: #414a50 !important;
         //margin: 15px 0 0;
     }
+    .book_pt{
+        text-align: center;
+    background: #fb5b21 !important;
+    width: 309px;
+    height: 5px;
+    border-radius: 50px;
+    padding: 0;
+    margin: 0 auto;
+    min-height: 3.6rem;
+    }
     .cc-content ion-label{
         margin-top: 0px;
         margin-bottom: 0px;
     }
+    .cc-content .item-md{
+       padding-left: 0px;
+    }
     .mm-xx{
         margin: -1px 0 25px;
     }
-    .list-on {
-        margin-bottom: 30px;
+    // .list-on {
+    //     margin-bottom: 30px;
+    // }
+    .list-md {
+         margin: -1px 0 0px; 
     }
     .freee_session {
         background-image: url(../../assets/imgs/free_bootcamp.jpg);
@@ -78,5 +100,14 @@ page-dashbord {
     }
     .freee_session div.item-inner{
         padding-right: 0 !important;
+    }
+    .fff-butto {
+        margin-top: 15px;
+        margin-bottom: 10px;
+        color: #fff;
+        background-color: #fb5b21;
+        width: 170px;
+        border: 2px solid #fff;
+        font-size: 1.2rem
     }
 }

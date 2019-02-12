@@ -101,5 +101,9 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
+    <plugin name="cordova-plugin-network-information" spec="2.0.1" />
+    <allow-navigation href="http://192.168.1.110:8100" sessionid="cea0f210" />
+    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <allow-navigation href="http://192.168.1.115:8100" sessionid="98b52dd0" />
     <engine name="android" spec="7.1.4" />
 </widget>

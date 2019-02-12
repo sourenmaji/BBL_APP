@@ -1,10 +1,11 @@
+import { PersonalTrainingBookingPage } from './../personal-training-booking/personal-training-booking';
 import { PricingPage } from './../pricing/pricing';
 import { ViewMotPage } from './../view-mot/view-mot';
 import { ViewBookingsPage } from './../view-bookings/view-bookings';
 import { BootcampSessionPage } from './../bootcamp-session/bootcamp-session';
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { ViewbootcampPurchasePage } from '../viewbootcamp-purchase/viewbootcamp-purchase';
 
 
@@ -22,13 +23,17 @@ export class DashbordPage {
   bookingType : any;
   allBookings: any;
   bookingValue : any;
+  selectPT: any;
   lastClicked: any;
   category: any;
   typeAs: any;
+  bootcampValue = {};
+  ptSessionValue= {};
   motDetails: any;
   freeBootDetails: any;
   bookingas: boolean = false;
-  bookingHistory = {"remainingSession":"","futureBooking":"","cancleBooking":""};
+  bookingState ={"state":"bootcamp","type":"future_booking"}
+  bookingHistory = {"remainingSession":"","futureBooking":"","cancleBooking":"","declineBooking":""};
   dashboardCategory = [ {
     moduleName : "Free Session", 
   },{
@@ -41,7 +46,7 @@ export class DashbordPage {
     moduleName : "My MOT", 
   }
 ];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
             private authService: AuthServiceProvider, private alertCtrl: AlertController) {
     const data = JSON.parse(localStorage.getItem('userData'));
    
@@ -138,19 +143,19 @@ getProducts(c: any)
         alert.present();
       }
     }, (err) => {
-     this.responseData = err.json();
+     this.responseData = err;
      console.log(this.responseData)
      const alert = this.alertCtrl.create({
-       subTitle: this.responseData.success.error,
+       subTitle: this.responseData.error,
        buttons: ['OK']
      })
      alert.present();
     });
   }
   else if(this.typeAs =="mybooking"){
-    this.bookingValue ="future_booking";
-    console.log(this.bookingValue);
-    this.myBookings(this.bookingValue);
+    //this.bookingValue ="future_booking";
+    console.log(this.bookingState);
+    this.myBookings();
   }
     else if(this.typeAs =="free-sessions"){
       this.authService.getData(this.typeAs,this.userPostData.token).then((result: any) => {
@@ -193,31 +198,146 @@ getProducts(c: any)
        this.responseData = err.json();
        console.log(this.responseData)
        const alert = this.alertCtrl.create({
-         subTitle: this.responseData.success.error,
+         subTitle: this.responseData.error,
          buttons: ['OK']
        })
        alert.present();
       });
     }
-    this.menuCtrl.close();
+    
   
   }
   viewMot(mot){
     this.navCtrl.push(ViewMotPage,{mot: mot});
   }
+// open PT section
+  bookPt(selectEvent: any){
+this.selectPT= selectEvent;
+console.log(this.selectPT);
+if(this.selectPT == "book_by_time"){
+  this.authService.getData('booking-pt-by-date',this.userPostData.token).then((result) => {
+      
+    this.responseData = result;
+    console.log(this.responseData);
+    if(this.responseData.status == true)
+    {
+    //console.log(this.responseData);
+  if(this.responseData.flag == 1){
+    const value = this.responseData.pt_session_address;
+    const valu1 = this.responseData.date_details;
+    this.navCtrl.push(PersonalTrainingBookingPage,{address:  value, date: valu1,type: "ptByDate"});
+  }else if(this.responseData.flag == 0 && this.responseData.blank_flag == 0){
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: "You Don't Have Any Purchased Personal Training Session, Do You Want To Purchase Personal Training Session?",
+      buttons: [{
+        text: "Yes",
+        handler: () => {
+            this.navCtrl.push(PricingPage,{purchaseType:"personal_training"});
+      }
+      }, {
+        text: "Cancel",
+        role: 'cancel'
+      }]
+    })
+    alert.present();
+  }else if(this.responseData.flag == 0 && this.responseData.blank_flag == 1){
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: "Your Purchased Plan is Not Approved Yet",
+      buttons: ['OK']
+    })
+    alert.present();
+  }
+     
+    }
+    else{
+     const alert = this.alertCtrl.create({
+      title: 'Failure',
+       subTitle: this.responseData.message,
+       buttons: ['OK']
+     })
+     alert.present();
+     this.allBookings = [];
+     //this.no_data=true;
+   }
+  },
+  (err) => {
+    
+   this.responseData = err.json();
+   console.log(this.responseData)
+  });
+}else if(this.selectPT == "book_by_trainer"){
+  this.authService.getData('booking-personal-training',this.userPostData.token).then((result) => {
+      
+    this.responseData = result;
+    console.log(this.responseData);
+    if(this.responseData.status == true)
+    {
+    //console.log(this.responseData);
+
+    if(this.responseData.flag == 1){
+      const value = this.responseData.pt_session_address;
+      const valu1 = this.responseData.all_pt_trainer;
+      this.navCtrl.push(PersonalTrainingBookingPage,{address:  value, trainer: valu1,type: "ptByTrainer"});
+    }else if(this.responseData.flag == 0 && this.responseData.blank_flag == 0){
+      let alert = this.alertCtrl.create({
+        title: 'Confirm',
+        message: "You Don't Have Any Purchased Personal Training Session, Do You Want To Purchase Personal Training Session?",
+        buttons: [{
+          text: "Yes",
+          handler: () => {
+              this.navCtrl.push(PricingPage,{purchaseType:"personal_training"});
+        }
+        }, {
+          text: "Cancel",
+          role: 'cancel'
+        }]
+      })
+      alert.present();
+    }else if(this.responseData.flag == 0 && this.responseData.blank_flag == 1){
+      let alert = this.alertCtrl.create({
+        title: 'Confirm',
+        message: "Your Purchased Plan is Not Approved Yet",
+        buttons: ['OK']
+      })
+      alert.present();
+    }
+      
+    }
+    else{
+     const alert = this.alertCtrl.create({
+      title: 'Failure',
+       subTitle: this.responseData.message,
+       buttons: ['OK']
+     })
+     alert.present();
+     this.allBookings = [];
+     //this.no_data=true;
+   }
+  },
+  (err) => {
+    
+   this.responseData = err.json();
+   console.log(this.responseData)
+  });
+  }
+}
+
   //showing bookings details
-  myBookings(bookWiseValue: any){
-    this.bookingValue = bookWiseValue;
-    console.log(this.bookingValue);
+  myBookings(){
+    console.log(this.bookingState);
+   // this.bookingValue = bookWiseValue;
+    //console.log(this.bookingValue);
     this.type ="myBookings";
-    if(this.bookingValue == "future_booking"){
+    if(this.bookingState.type == "future_booking"){
       this.bookingas = true;
     }else{
       this.bookingas = false;
     }
     console.log(this.bookingas);
    // alert(this.userPostData.token);
-    this.authService.authData({option  :this.bookingValue},'mybooking',this.userPostData.token).then((result) => {
+    this.authService.authData({option :this.bookingState.type,session: this.bookingState.state},'mybooking',this.userPostData.token).then((result) => {
       
       this.responseData = result;
 
@@ -226,10 +346,20 @@ getProducts(c: any)
       console.log(this.responseData);
 
       const value = this.responseData;
-      this.allBookings = value.all_booking;
-      this.bookingHistory.cancleBooking = value.total_cancelled_booking;
-      this.bookingHistory.futureBooking = value.total_future_booking;
-      this.bookingHistory.remainingSession = value.no_of_sessions;
+      if(value.all_booking.length > 0){
+        console.log("in if");
+        this.allBookings = value.all_booking;
+      }else if(value.all_pt_booking.length > 0){
+        console.log("in else");
+        this.allBookings = value.all_pt_booking;
+      }
+      // this.allBookings = value.all_booking;
+      // this.ptBookings = value.all_pt_booking;
+      this.bootcampValue = value.bootcamp;
+      this.ptSessionValue =  value.pt_session;
+      // this.bookingHistory.cancleBooking = value.total_cancelled_booking;
+      // this.bookingHistory.futureBooking = value.total_future_booking;
+      // this.bookingHistory.remainingSession = value.no_of_sessions;
       console.log(this.bookingHistory);
        this.bookingType ="bookingHistory";
       }
@@ -240,7 +370,7 @@ getProducts(c: any)
          buttons: ['OK']
        })
        alert.present();
-       this.allBookings = [];
+       //this.allBookings = [];
        //this.no_data=true;
      }
     },
@@ -249,7 +379,7 @@ getProducts(c: any)
      this.responseData = err.json();
      console.log(this.responseData)
     });
-    this.menuCtrl.close();
+    // this.menuCtrl.close();
   }
     onOpenMenu(){
       this.menuCtrl.open();
@@ -278,19 +408,27 @@ getProducts(c: any)
           // this.bootAddress = value;
           // this.addressLine1 = value.address_line1;
           // this.bootDate = valu1;
-            }else if(this.responseData.flag == 0){
+            }else if(this.responseData.flag == 0 && this.responseData.blank_flag == 0){
               let alert = this.alertCtrl.create({
                 title: 'Confirm',
                 message: "You Don't Have Any Purchased Bootcamp Session, Do You Want To Purchase Bootcamp Session?",
                 buttons: [{
                   text: "Yes",
                   handler: () => {
-                      this.navCtrl.push(PricingPage);
+                      this.navCtrl.push(PricingPage,{purchaseType:"bootcamp"});
                 }
                 }, {
                   text: "Cancel",
                   role: 'cancel'
                 }]
+              })
+              alert.present();
+            }
+            else if(this.responseData.flag == 0 && this.responseData.blank_flag == 1){
+              let alert = this.alertCtrl.create({
+                title: 'Confirm',
+                message: "Your Purchased Plan is Not Approved Yet",
+                buttons: ['OK']
               })
               alert.present();
             }

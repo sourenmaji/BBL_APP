@@ -12,9 +12,9 @@
               <form novalidate [formGroup]="seesionBookingForm"> 
                    <ion-item>
                       <ion-label>Address<span style="color: red">*</span></ion-label>
-                     <ion-input type="text"  [disabled]="true" value="{{bootAddress.address_line1}}">
+                     <ion-textarea type="text" text-wrap [disabled]="true" value="{{bootAddress.address_line1}}">
 
-                     </ion-input>
+                     </ion-textarea>
                       <!-- <ion-select [(ngModel)]="sessionData.address"  formControlName="address" >
                         <ion-option   selected value="{{bootAddress.id}}"><strong text-wrap>{{bootAddress.address_line1}}</strong></ion-option>
                       </ion-select> -->

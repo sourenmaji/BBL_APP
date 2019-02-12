@@ -15,7 +15,16 @@
 
     <p style="text-align: center">Payment success</p>
     <p text-wrap style="text-align: center">Your Order Ref ID is {{order_ref_id}}. Please note down that Order Ref ID for future reference.</p>
-    <ion-col class="frgt-area3">   
-            <button ion-button round color="secondary" (click)="openBootcampSession()">Book Bootcamp Session</button><br/>
+    <ion-col class="frgt-area3" *ngIf="training_type == 'Personal Training'" >   
+            <ion-item class="book_pt">
+                    <ion-label ion-text color="white">Book PT Session</ion-label>
+                    <ion-select (ionChange)="bookPt($event)" >
+                      <ion-option  value="book_by_time" ><span ion-text color="white">Book By Time</span></ion-option>
+                      <ion-option   value="book_by_trainer"><span ion-text color="white">Book By Trainer </span></ion-option>
+                    </ion-select>
+                </ion-item>
     </ion-col>
+    <ion-col class="frgt-area3" *ngIf="training_type == 'Bootcamp'" >   
+      <button class="fff-butto" ion-button round  (click)="openBootcampSession()">Book Bootcamp Session</button>
+</ion-col>
 </ion-content>

@@ -56,13 +56,14 @@
             <ion-row>
               <ion-col>
                 <h2 ion-text color="white">Payment Mode</h2><br>
-                <strong  ion-text color="success">{{purchase.payment_option}}</strong>
+                <strong  ion-text color="success" *ngIf="purchase.total_price != '0.00'">{{purchase.payment_option}}</strong>
+                <strong  ion-text color="success" *ngIf="purchase.total_price == '0.00'">Free</strong>
                 <!-- <strong *ngIf="mot.right_thigh == null" ion-text color="success">n/a</strong> -->
               </ion-col>
               <ion-col>
                   <h2 ion-text color="white">Plan Scheme</h2><br>
-                  <strong  ion-text color="success">{{purchase.payment_type}}</strong>
-                
+                  <strong  ion-text color="success" *ngIf="purchase.total_price != '0.00'">{{purchase.payment_type}}</strong>
+                  <strong  ion-text color="success" *ngIf="purchase.total_price == '0.00'">Promotional</strong>
               </ion-col>
             </ion-row>
           </ion-item>
@@ -70,8 +71,8 @@
               <ion-row>
                 <ion-col>
                   <h2 ion-text color="white">Status</h2><br>
-                  <strong  ion-text color="success">{{purchase.payment_status}}</strong>
-                 
+                  <strong  ion-text color="success" *ngIf="purchase.total_price != '0.00'">{{purchase.payment_status}}</strong>
+                  <strong  ion-text color="success" *ngIf="purchase.total_price == '0.00'">Promotion & Offers</strong>
                 </ion-col>
               </ion-row>
             </ion-item>

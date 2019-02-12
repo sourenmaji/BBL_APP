@@ -1,3 +1,6 @@
+import { GdprPage } from './../pages/gdpr/gdpr';
+import { NetworkProvider } from './../providers/network-provider/network_provider';
+import { Network } from '@ionic-native/network';
 
 import { ChangePasswordPage } from './../pages/change-password/change-password';
 import { EditProfilePage } from './../pages/edit-profile/edit-profile';
@@ -9,11 +12,11 @@ import { PricingPage } from './../pages/pricing/pricing';
 import { DashbordPage } from './../pages/dashbord/dashbord';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController } from 'ionic-angular';
+import { Platform, NavController, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { ErrorPage } from '../pages/error/error';
 @Component({
   selector: 'page-app',
   templateUrl: 'app.html'
@@ -26,14 +29,17 @@ export class MyApp {
   highlighted: any[];
   pages: any;
   isclick: boolean = false;
+  userPostData = {"user":"","token":""};
   @ViewChild('nav') nav: NavController;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl: MenuController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private menuCtrl: MenuController,
+    public network: Network,public events: Events,
+    public networkProvider: NetworkProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-this.isclick = false;
+      this.isclick = false;
       this.pages =[
         {title: 'Dashboard', component: DashbordPage, iconName: "easel"},
         {title: 'Pricing', component: PricingPage, iconName: "cash"},
@@ -47,8 +53,46 @@ this.isclick = false;
         {title: 'Log Out', component: null, iconName: "log-out"},
       ]
       this.activePage = this.pages[0];
+      this.networkProvider.initializeNetworkEvents();
+      this.networkProvider.getNetworkState();
+
+       // Offline event
+    this.events.subscribe('network:offline', () => {
+        this.nav.push(ErrorPage);
     });
+
+    // Online event
+    this.events.subscribe('network:online', () => {
+        this.nav.pop();
+    });
+
+
+
+    });
+
+    const data = JSON.parse(localStorage.getItem('userData'));
+    console.log(data);
+    if(data)
+    {
+      var gdp = data.GDP;
+      this.userPostData.user = data.user;
+      this.userPostData.token = data.token;
+    }
+    if(this.userPostData.token)
+    {
+      if(gdp == 0){
+        this.rootPage = GdprPage;
+      }else{
+        this.rootPage = DashbordPage;
+      }
+      
+    }
+    else
+    {
+      this.rootPage = LoginPage;
+    }
   }
+
   openPage(page){
     if(page.component != null){
 
@@ -77,5 +121,6 @@ onload(page: any){
   this.nav.setRoot(page);
   this.menuCtrl.close();
 }
+
 }
 

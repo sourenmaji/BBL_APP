@@ -5,7 +5,6 @@
 
 </ion-header>
 <ion-content padding id="welcome" class="scroll-content">
-    <div ion-fixed> 
   <ion-row>
     <ion-col>
       <img src="assets/imgs/icon.png" class="logo"/>
@@ -122,8 +121,55 @@
               Your passwords does not match
             </div>
           </ion-item>
+          <ion-item class="wlcm-itm">
+            <p text-wrap ion-text color="white"> Are you happy for Body By Lekan to contact you for any offers/discounts/news/marketing purposes?</p>
+          </ion-item>
+          <ion-row radio-group [(ngModel)]="userData.customer_communication" formControlName="customer_communication"
+          (ionChange)="change($event)">
+            <!-- <ion-col>
+              <ion-item class="wlcm-abc">
+                <ion-icon color="white" name="transgender"></ion-icon>Gender
+              </ion-item>
+            </ion-col> -->
+            <ion-col>
+              <ion-item class="wlcm-abc">
+                <ion-label>yes</ion-label>
+                <ion-radio   value="1" ></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="wlcm-abc">
+               <ion-label>no</ion-label>
+                <ion-radio  value="0" ></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-item class="wlcm-itm" *ngIf="ischecked">
+            <p text-wrap ion-text color="white">If yes, then please specify methods of communication? <span style="color: red">*</span></p>
+          </ion-item>
+         
+            <!-- <div *ngFor="let member of mediaList" >
+              <ion-label>{{member.testName}}
+              <ion-checkbox color="dark" [(ngModel)]="member.checked" formControlName="check_val" (ionChange)="show()"></ion-checkbox></ion-label>
+            </div> -->
+             <div  *ngIf="ischecked"> 
+            <ion-label style="display:inline-block">Whatsapp
+              <ion-checkbox color="dark"  formControlName="is_whatsapp" value="1" (ionChange)="show()"></ion-checkbox></ion-label>
+            
+              <ion-label style="display:inline-block">SMS
+                <ion-checkbox color="dark"  formControlName="is_sms" (ionChange)="show()"></ion-checkbox></ion-label>
+                <ion-label style="display:inline-block">Phone
+                  <ion-checkbox color="dark"  formControlName="is_phone" (ionChange)="show()"></ion-checkbox></ion-label>
+                  <ion-label style="display:inline-block">Email
+                    <ion-checkbox color="dark"  formControlName="is_email" (ionChange)="show()"></ion-checkbox></ion-label>
+             </div>  
+             <ion-item class="wlcm-itm" *ngIf="ischecked && isSelect">
+              <div class="error">
+                Please Select Atleast One
+              </div>
+             </ion-item> 
           <div class="frgt-area2">
-          <button class="button-md-success" ion-button round [disabled]="signupform.invalid" (click)="register()">Register</button><br/>
+          <button class="button-md-success" ion-button round [disabled]="signupform.invalid || isSelect" (click)="register()">Register</button><br/>
           <span class="nw-bb">Or login with</span><br>
                     
           <ion-row>
@@ -131,8 +177,8 @@
               <button ion-button small icon-only (click)="loginWithFb()">
                 <ion-icon  name="logo-facebook" color="primary" ></ion-icon>
               </button>
-              <button ion-button  small clear icon-only >
-                <ion-icon name="logo-googleplus" color="danger" (click)="loginWithGoogle()"></ion-icon>
+              <button ion-button  small clear icon-only (click)="loginWithGoogle()">
+                <ion-icon name="logo-googleplus" color="danger" ></ion-icon>
               </button>
               <!-- <button ion-button  small clear icon-only >
                 <ion-icon name="logo-instagram" color="primary" ></ion-icon>
@@ -146,5 +192,5 @@
         
       </ion-card-content>
     </ion-card>
-</div>
+
 </ion-content>

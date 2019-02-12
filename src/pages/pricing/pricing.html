@@ -1,6 +1,6 @@
 
 <ion-header>
-    <ion-navbar color="success">
+    <ion-navbar color="success" hideBackButton="true">
        <ion-buttons style="float:left">
             <button ion-button icon-only   (click)="onOpenMenu()">
               <ion-icon name="menu"></ion-icon>
@@ -49,8 +49,8 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col col-auto style="width: 100%;text-align: center">
-                                        <h2 *ngIf="price.validity_duration != null" ion-text color="white">Contract-{{price.validity_duration}}</h2>
-                                        <h2 *ngIf="price.validity_duration == null" ion-text color="white">Contract-N/A</h2>
+                                        <h2 *ngIf="price.contract != null" ion-text color="white">Contract-{{price.contract}}</h2>
+                                        <h2 *ngIf="price.contract == null" ion-text color="white">Contract-N/A</h2>
                                 </ion-col>
                             </ion-row>
                      
@@ -64,7 +64,7 @@
                           </ion-col>
                           </ion-row>
                           <div class="frgt-area">
-                                <button class="subs" ion-button round (click)="subscribe(price)">Subscribe</button>
+                                <button class="subs" ion-button round (click)="subscribe(price)">Purchase</button>
                          </div>
                    </ion-item>
           
@@ -103,8 +103,8 @@
                             </ion-row>
                             <ion-row>
                                 <ion-col col-auto style="width: 100%;text-align: center">
-                                        <h2 *ngIf="price.validity_duration != null" ion-text color="white">Contract-{{price.validity_duration}}</h2>
-                                        <h2 *ngIf="price.validity_duration == null" ion-text color="white">Contract-N/A</h2>
+                                        <h2 *ngIf="price.contract != null" ion-text color="white">Contract-{{price.contract}}</h2>
+                                        <h2 *ngIf="price.contract == null" ion-text color="white">Contract-N/A</h2>
                                 </ion-col>
                             </ion-row>
                      
@@ -118,7 +118,7 @@
                           </ion-col>
                           </ion-row>
                           <div class="frgt-area">
-                                <button class="subs" ion-button round (click)="subscribe(price)">Subscribe</button>
+                                <button class="subs" ion-button round (click)="subscribe(price)">Purchase</button>
                          </div>
                    </ion-item>
           

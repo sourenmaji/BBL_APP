@@ -33,7 +33,7 @@
        <img src="{{this.imageUrl+business.business_image}}">
       </ion-item> -->
        <ion-card-content >
-          <h1 ion-text color="text">{{exercise.title}}</h1>
+          <h1 ion-text color="text" text-wrap>{{exercise.title}}</h1>
           <div *ngIf="exercise.description.length <= limit"><p text-wrap ion-text color="text1">{{exercise.description}}</p></div>
           <div *ngIf="truncating && exercise.description.length > limit">
             <p text-wrap ion-text color="text1">{{exercise.description | truncate : limit}}<br></p>

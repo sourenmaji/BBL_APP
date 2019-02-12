@@ -25,7 +25,7 @@ export class PaymentsPage implements OnInit{
   responseData: any;
   paymentDetails: any;
   userPostData = {"user":"","token":""};
-  userData = { product_id: "",package_description: "", filename: ""}
+  userData = { product_id: "",package_description: "", filename: "", updated_price: ""}
   targetPath = "";
   paymentform: FormGroup;
   lastImage: string = null;
@@ -41,7 +41,7 @@ export class PaymentsPage implements OnInit{
     private transfer: FileTransfer) {
     this.PayOptions = this.navParams.get('options');
     this.price = this.navParams.get('price');
-    console.log(this.price.product_id);
+    console.log(this.price);
     console.log(this.PayOptions);
     const data = JSON.parse(localStorage.getItem('userData'));
                 this.userDetails = data.user;
@@ -83,7 +83,7 @@ export class PaymentsPage implements OnInit{
          this.loading.dismissAll();
         this.responseData = token;
        // console.log(JSON.stringify(this.responseData));
-       this.authService.authData({product_id:this.price.product_id,stripeToken:token.id},'bootcamp-stripe-payment',this.userPostData.token).then((result: any) => {
+       this.authService.authData({product_id:this.price.product_id,stripeToken:token.id,updated_price:this.price.total_price},'bootcamp-stripe-payment',this.userPostData.token).then((result: any) => {
         this.responseData = result; 
         if(result.status)
         {
@@ -97,7 +97,7 @@ export class PaymentsPage implements OnInit{
   
        })
        alert1.present();
-       this.navCtrl.push(SuccessPage,{order_ref_id:  this.paymentDetails.order_ref_id});
+       this.navCtrl.push(SuccessPage,{order_ref_id:  this.paymentDetails.order_ref_id,training_type: this.price.training_name});
         }
         else{ 
           const alert = this.alertCtrl.create({
@@ -121,44 +121,12 @@ export class PaymentsPage implements OnInit{
 
         })
         .catch((error) => {
-         this.responseData = error.JSON;
+          this.loading.dismissAll();
+         this.responseData = error;
+         alert(this.responseData);
         })
   }
- // this.authService.getDataWithoutToken('pricing').then((result) => {
-  // payOnline(){
-  //   this.authService.authData({product_id:this.price.product_id},'bootcamp-onlinepayment',this.userPostData.token).then((result: any) => {
-  //     this.responseData = result;
-  //     if(result.status)
-  //     {
-        
-  //     console.log(this.responseData);
-  //    this.paymentDetails = this.responseData;
-  //     const alert = this.alertCtrl.create({
-  //      subTitle: this.responseData.message,
-  //      buttons: ['OK']
-
-  //    })
-  //    alert.present();
-  //    this.navCtrl.push(SuccessPage);
-  //     }
-  //     else{ console.log(this.responseData.error); 
-  //       const alert = this.alertCtrl.create({
-  //         subTitle: this.responseData.message,
-  //         buttons: ['OK']
-   
-  //       })
-  //       alert.present();
-  //     }
-  //   }, (err) => {
-  //    this.responseData = err.json();
-  //    console.log(this.responseData)
-  //    const alert = this.alertCtrl.create({
-  //      subTitle: this.responseData.success.error,
-  //      buttons: ['OK']
-  //    })
-  //    alert.present();
-  //   });
-  // }
+ 
   pickImage()
   {
     
@@ -295,7 +263,7 @@ export class PaymentsPage implements OnInit{
 
       const fileTransfer: FileTransferObject = this.transfer.create();
       fileTransfer.upload(this.targetPath, this.apiUrl+'bootcamp-bankpayment', options).then((data) => {
-        
+        console.log(this.price.training_name);
         this.result = data;
         var success = JSON.parse(this.result.response);
         if(success.status===true){
@@ -304,7 +272,7 @@ export class PaymentsPage implements OnInit{
           buttons: ['OK']
         })
         alert.present();
-        this.navCtrl.push(SuccessPage);
+        this.navCtrl.push(SuccessPage,{training_type: this.price.training_name});
         }
         else
         {
@@ -331,6 +299,8 @@ export class PaymentsPage implements OnInit{
     }
     else
     {
+        this.userData.updated_price = this.price.total_price;
+        console.log(this.userData);
       this.authService.authData(this.userData,'bootcamp-bankpayment',this.userPostData.token).then((data) => {
         
         this.responseData = data;
@@ -343,7 +313,7 @@ export class PaymentsPage implements OnInit{
 
           })
           alert.present();
-          this.navCtrl.push(SuccessPage);
+          this.navCtrl.push(SuccessPage,{training_type: this.price.training_name});
         }
         else{
           const alert = this.alertCtrl.create({

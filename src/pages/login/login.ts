@@ -1,9 +1,11 @@
+import { ChangePasswordPage } from './../change-password/change-password';
+import { GdprPage } from './../gdpr/gdpr';
 import { Facebook , FacebookLoginResponse} from '@ionic-native/facebook';
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
 import { ForgetPasswordPage } from './../forget-password/forget-password';
 import { RegistrationPage } from './../registration/registration';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DashbordPage } from '../dashbord/dashbord';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -18,7 +20,7 @@ import {  HttpClient } from '@angular/common/http';
 export class LoginPage implements OnInit{
   signinform: FormGroup;
   responseData : any;
-  userData = {password: "123456", email: "bbl18uk@gmail.com"};
+  userData = {password: "", email: ""};
   googleData: any;
   facebookData: any;
   registervalue : any;
@@ -26,6 +28,7 @@ export class LoginPage implements OnInit{
   email: any;
   providerId: any;
   name: any;
+  changePasswordFlag : boolean = true;
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public authService: AuthServiceProvider,
   public alertCtrl: AlertController, private facebook: Facebook, public googlePlus: GooglePlus, public http: HttpClient) {
   }
@@ -49,7 +52,7 @@ export class LoginPage implements OnInit{
       else{ 
         
         this.registervalue = this.responseData.user;
-       
+     //  alert(this.registervalue);
         this.navCtrl.push(RegistrationPage,{registervalue:  this.registervalue});
        
       }
@@ -122,11 +125,23 @@ export class LoginPage implements OnInit{
 
      if(this.responseData.status)
      {
+       var gdpr = this.responseData.GDP;
+       var changePassFlag = this.responseData.flag;
        loader.dismiss();
      console.log(this.responseData);
      localStorage.setItem('userData', JSON.stringify(this.responseData));
      console.log("Local storage "+(localStorage.getItem('userData')));
-     this.navCtrl.push(DashbordPage);
+     
+     if(gdpr == 0){
+      this.navCtrl.push(GdprPage);
+     }else if(changePassFlag == 0){
+      this.changePasswordFlag = false;
+       this.navCtrl.push(ChangePasswordPage,{changePasswordFlag: this.changePasswordFlag});
+      
+    }else{
+      this.navCtrl.push(DashbordPage);
+     }
+     
      }
      else{
       

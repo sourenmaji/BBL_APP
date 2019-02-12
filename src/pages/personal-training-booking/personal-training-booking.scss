@@ -1,0 +1,27 @@
+page-personal-training-booking {
+    .frgt-area2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button-md-success {
+        color: #fff;
+        background-color: #fb5b21;
+        width: 190px;
+        border: 2px solid #fff;
+    }
+    .error {
+        color: rgb(223, 62, 62);
+        font-size: 11px;
+      }
+      .success {
+        color: rgb(84, 245, 10);
+        font-size: 11px;
+      }
+      .wlcm-itm{
+        background: none;
+        padding-left: 0
+    }
+    .bb_session ion-select{
+        max-width: 78%;
+    }
+}

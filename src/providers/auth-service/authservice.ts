@@ -8,7 +8,7 @@ export class AuthServiceProvider {
   pageReset: boolean = false;
    imageUrl: string = "http://192.168.1.201:5100/backend/images/";
   apiUrl: string = "http://192.168.1.201:5100/api/v1/";
-  //apiUrl: string = "http://192.168.1.109/bbl_app/public/api/v1/";
+  // apiUrl: string = "http://192.168.1.118/bbl_app/public/api/v1/";
   loading: Loading;
   constructor(public http: Http, private loadingCtrl: LoadingController) {
     console.log('Hello AuthServiceProvider');

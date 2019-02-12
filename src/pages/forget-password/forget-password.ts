@@ -1,7 +1,7 @@
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 
 
 @IonicPage()

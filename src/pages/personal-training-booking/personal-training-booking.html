@@ -1,0 +1,114 @@
+
+<ion-header>
+  <ion-navbar color="success">
+    <ion-title *ngIf="type == 'ptByTrainer'">PT Book By trainer</ion-title>
+    <ion-title *ngIf="type == 'ptByDate'">PT Book By Date</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="bb_session">
+  <ion-list *ngIf="type == 'ptByTrainer'">
+    <form novalidate [formGroup]="bookByTrainerBookingForm"> 
+         <ion-item>
+            <ion-label>Address<span style="color: red">*</span></ion-label>
+           <ion-textarea type="text" text-wrap [disabled]="true" value="{{address.address_line1}}">
+
+           </ion-textarea>
+           
+        </ion-item> 
+        
+        <ion-item *ngIf="allTrainers != null">
+          <ion-label>Available Trainer<span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="sessionData.availableTrainer"  formControlName="availableTrainer" (ionChange)="dateSelect($event)">
+            <ion-option  *ngFor ="let trainer of allTrainers; let i = index" value="{{trainer.trainer_id}}">{{trainer.trainer_name}}</ion-option>
+          </ion-select>
+      </ion-item> 
+      <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableTrainer').hasError('required')  || bookByTrainerBookingForm.get('availableTrainer').touched">
+          <div class="error" *ngIf="bookByTrainerBookingForm.get('availableTrainer').hasError('required') && bookByTrainerBookingForm.get('availableTrainer').touched">
+            Please Select Any Trainer
+          </div>
+          
+        </ion-item>
+        <ion-item *ngIf="ptDate != null && dateAvailable">
+          <ion-label>Available Date<span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="sessionData.availableDate"  formControlName="availableDate" (ionChange)="timeSelect($event)">
+            <ion-option  *ngFor ="let date of ptDate; let i = index" value="{{date.plan_date}}">{{date.plan_date | date}}</ion-option>
+          </ion-select>
+      </ion-item> 
+      <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableDate').hasError('required')  || bookByTrainerBookingForm.get('availableDate').touched">
+          <div class="error" *ngIf="bookByTrainerBookingForm.get('availableDate').hasError('required') && bookByTrainerBookingForm.get('availableDate').touched">
+            Please Select Any Date
+          </div>
+          
+        </ion-item>
+      <ion-item *ngIf="ptTime != null && timeAvailable">
+          <ion-label>Available Time<span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="sessionData.availableTime" formControlName="availableTime">
+            <ion-option  *ngFor ="let time of ptTime; let i = index" value="{{time.id}}">{{time.all_time}}</ion-option>
+          </ion-select>
+      </ion-item> 
+      <ion-item  no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableTime').hasError('required')  || bookByTrainerBookingForm.get('availableTime').touched">
+          <div class="error" *ngIf="bookByTrainerBookingForm.get('availableTime').hasError('required') && bookByTrainerBookingForm.get('availableTime').touched">
+            Please Select Any Time
+          </div>
+          
+        </ion-item>
+      <div class="frgt-area2">
+          <button class="button-md-success" ion-button round [disabled]="bookByTrainerBookingForm.invalid" (click)="addBookByTrainer()">Add Session</button><br/>
+      </div>
+     </form>  
+</ion-list>
+<ion-list *ngIf="type == 'ptByDate'">
+  <form novalidate [formGroup]="bookByTrainerBookingForm"> 
+       <ion-item>
+          <ion-label>Address<span style="color: red">*</span></ion-label>
+         <ion-textarea type="text" text-wrap  [disabled]="true" value="{{address.address_line1}}">
+
+         </ion-textarea>
+         
+      </ion-item> 
+      
+      
+      <ion-item *ngIf="availableDate != null">
+        <ion-label>Available Date<span style="color: red">*</span></ion-label>
+        <ion-select [(ngModel)]="sessionData.availableDate"  formControlName="availableDate" (ionChange)="timeSelectBytime($event)">
+          <ion-option  *ngFor ="let date of availableDate; let i = index" value="{{date.plan_date}}">{{date.plan_date | date}}</ion-option>
+        </ion-select>
+    </ion-item> 
+    <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableDate').hasError('required')  || bookByTrainerBookingForm.get('availableDate').touched">
+        <div class="error" *ngIf="bookByTrainerBookingForm.get('availableDate').hasError('required') && bookByTrainerBookingForm.get('availableDate').touched">
+          Please Select Any Date
+        </div>
+        
+      </ion-item>
+    <ion-item *ngIf="ptTime != null && timeAvailable">
+        <ion-label>Available Time<span style="color: red">*</span></ion-label>
+        <ion-select [(ngModel)]="sessionData.availableTime" formControlName="availableTime" (ionChange)="trainerSelect($event)">
+          <ion-option  *ngFor ="let time of ptTime; let i = index" value="{{time.id}}">{{time.all_time}}</ion-option>
+        </ion-select>
+    </ion-item> 
+    <ion-item  no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableTime').hasError('required')  || bookByTrainerBookingForm.get('availableTime').touched">
+        <div class="error" *ngIf="bookByTrainerBookingForm.get('availableTime').hasError('required') && bookByTrainerBookingForm.get('availableTime').touched">
+          Please Select Any Time
+        </div>
+        
+      </ion-item>
+      <ion-item *ngIf="ptTrainers != null && trainerAvailable">
+        <ion-label>Available Trainer<span style="color: red">*</span></ion-label>
+        <ion-select [(ngModel)]="sessionData.availableTrainer"  formControlName="availableTrainer" >
+          <ion-option  *ngFor ="let trainer of ptTrainers; let i = index" value="{{trainer.trainer_id}}">{{trainer.trainer_name}}</ion-option>
+        </ion-select>
+    </ion-item> 
+    <ion-item no-lines class="wlcm-itm" no-lines *ngIf=" bookByTrainerBookingForm.get('availableTrainer').hasError('required')  || bookByTrainerBookingForm.get('availableTrainer').touched">
+        <div class="error" *ngIf="bookByTrainerBookingForm.get('availableTrainer').hasError('required') && bookByTrainerBookingForm.get('availableTrainer').touched">
+          Please Select Any Trainer
+        </div>
+        
+      </ion-item>
+    <div class="frgt-area2">
+        <button class="button-md-success" ion-button round [disabled]="bookByTrainerBookingForm.invalid" (click)="addPtByDate()">Add Session</button><br/>
+    </div>
+   </form>  
+</ion-list>
+</ion-content>

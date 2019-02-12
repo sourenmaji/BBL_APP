@@ -6,55 +6,51 @@
 </ion-header>
 
 <ion-content >
-    <form (ngSubmit)="logForm()">
+   
+    <form >
     <ion-card class="wlcm-crd">
         <ion-card-content>
   <ion-list class="scroll-content">
-    <!-- <ion-item>
-      <h1 ion-text color="white">Customer Details</h1>
-    </ion-item>
-    <ion-item>
-        <h3 ion-text color="white">Name - <span><h2 ion-text color="success">{{userDetails.name}}</h2></span></h3><br>
-        <h3 ion-text color="white">Email - <span><h2 ion-text color="success">{{userDetails.email}}</h2></span></h3><br>
-        <h3 ion-text color="white">Phone - <span><h2 ion-text color="success">{{userDetails.ph_no}}</h2></span></h3><br>
-    </ion-item> -->
     <ion-item>
         <h1 ion-text color="white">Product Details</h1>
     </ion-item>
+    <!-- <ion-item>
+        <button (click)="launch(url)" style="width:30%" ion-button color="danger" >TEST Button</button>
+    </ion-item> -->
       <ion-item>
-        <ion-row>
-          <ion-col>
-              <h2 ion-text color="white">Plan Type -</h2><br>
-              <strong  ion-text color="success">{{price.training_name}}</strong>
+        
+              <h2 ion-text color="white">Plan Type - <strong  ion-text color="success">{{price.training_name}}</strong></h2>
               
-          </ion-col>
-        <ion-col>
-            <h2 ion-text color="white">Price -</h2><br>
-            <strong  ion-text color="success">{{price.total_price}}</strong>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-              <h2 ion-text color="white">No. Of Sessions -</h2><br>
-              <strong  ion-text color="success">{{price.total_sessions}}</strong>
               
-          </ion-col>
-        <ion-col>
-            <h2 ion-text color="white">Validity -</h2><br>
-            <strong *ngIf="price.validity_duration != null" ion-text color="success">{{price.validity_duration}}</strong>
-            <strong *ngIf="price.validity_duration == null" ion-text color="success">N/A</strong>
-        </ion-col>
-      </ion-row>
+          <div *ngIf="discount == 'no'">
+            <h2 ion-text color="white">Price - <strong  ion-text color="success">£ {{price.total_price}}</strong></h2>
+          </div>
+           <div *ngIf="discount == 'yes'">
+            <div class="ii-text">
+              <h2 ion-text color="white">Price - <strong  ion-text color="success">£ {{price.total_price}}</strong></h2>
+          </div>
+          <h2 ion-text color="white">Discounted Price - <strong  ion-text color="success">£ {{discountedPrice}}</strong></h2>
+           </div>
+           
+            
+        </ion-item>
+        <ion-item>
+              <h2 ion-text color="white">No. Of Sessions - <strong  ion-text color="success">{{price.total_sessions}}</strong></h2>
+             
+            <h2 ion-text color="white">Validity - <strong *ngIf="price.validity_duration != null" ion-text color="success">{{price.validity_duration}} DAYS</strong><strong *ngIf="price.validity_duration == null" ion-text color="success">N/A</strong></h2>
+            
+            
+        
       </ion-item>
-            <!-- <ion-col>
-          <h3 ion-text color="white">No. Of Sessions - <span ion-text color="success">{{price.total_sessions}}</span></h3>
-          <h3 *ngIf="price.validity_duration != null" ion-text color="white">Validity - <span ion-text color="success">{{price.validity_duration}}</span> </h3>
-          <h3 *ngIf="price.validity_duration == null" ion-text color="white">Validity - <span><h2 ion-text color="success">N/A</h2></span> </h3>
-          </ion-col>
-          
-        </ion-item> -->
-       
-      
+      <div>
+        <div class="ii-input">
+            <ion-input  type="text" [(ngModel)]="data.coupon" placeholder="Coupon Code" [ngModelOptions]="{standalone: true}" ></ion-input>
+        </div>
+        
+        <div class="frgt-area5">
+          <button class="button-mmm-success" ion-button round (click)="apply(data.coupon)">Apply</button>
+        </div>
+        </div>
           <ion-list  *ngIf="price.payment_type_name == 'Pay as you go'" radio-group [(ngModel)]="data.paymentOption" [ngModelOptions]="{standalone: true}" class="pricing">
           <ion-item>
           <h1 ion-text color="white">Payment Option</h1>
@@ -73,18 +69,57 @@
             <ion-item>
             <h1 ion-text color="white">Payment Option</h1>
           </ion-item>
-          <!-- <ion-item>
-            <ion-label ion-text color="white">Card Payment</ion-label>
-              <ion-radio   value="onlinePayment"></ion-radio>
-          </ion-item> -->
+          <ion-item>
+            <ion-label ion-text color="white">Setup Direct Debit</ion-label>
+              <ion-radio value="directDebit" (ionSelect)="selectPaymentMethod('directDebit')"></ion-radio>
+          </ion-item>
+
+
+          <ion-item *ngIf="isvisible">
+            <ion-label>Day of Month <span style="color: red">*</span></ion-label>
+            <!-- <ion-input type="Number" [(ngModel)]="cardData.expMonth"  clearOnEdit="false" placeholder="MM"
+            formControlName="expMonth">
+            </ion-input> -->
+            <ion-select [(ngModel)]="data.dom" [ngModelOptions]="{standalone: true}" class="mm-item" >
+              <ion-option value="1"><span ion-text color="white">1st</span></ion-option>
+              <ion-option value="2"><span ion-text color="white">2nd</span></ion-option>
+              <ion-option value="3"><span ion-text color="white">3rd</span></ion-option>
+              <ion-option value="4"><span ion-text color="white">4th</span></ion-option>
+              <ion-option value="5"><span ion-text color="white">5th</span></ion-option>
+              <ion-option value="6"><span ion-text color="white">6th</span></ion-option>
+              <ion-option value="7"><span ion-text color="white">7th</span></ion-option>
+              <ion-option value="8"><span ion-text color="white">8th</span></ion-option>
+              <ion-option value="9"><span ion-text color="white">9th</span></ion-option>
+              <ion-option value="10"><span ion-text color="white">10th</span></ion-option>
+              <ion-option value="11"><span ion-text color="white">11th</span></ion-option>
+              <ion-option value="12"><span ion-text color="white">12th</span></ion-option>
+              <ion-option value="13"><span ion-text color="white">13th</span></ion-option>
+              <ion-option value="14"><span ion-text color="white">14th</span></ion-option>
+              <ion-option value="15"><span ion-text color="white">15th</span></ion-option>
+              <ion-option value="16"><span ion-text color="white">16th</span></ion-option>
+              <ion-option value="17"><span ion-text color="white">17th</span></ion-option>
+              <ion-option value="18"><span ion-text color="white">18th</span></ion-option>
+              <ion-option value="19"><span ion-text color="white">19th</span></ion-option>
+              <ion-option value="20"><span ion-text color="white">20th</span></ion-option>
+              <ion-option value="21"><span ion-text color="white">21st</span></ion-option>
+              <ion-option value="22"><span ion-text color="white">22nd</span></ion-option>
+              <ion-option value="23"><span ion-text color="white">23rd</span></ion-option>
+              <ion-option value="24"><span ion-text color="white">24th</span></ion-option>
+              <ion-option value="25"><span ion-text color="white">25th</span></ion-option>
+              <ion-option value="26"><span ion-text color="white">26th</span></ion-option>
+              <ion-option value="27"><span ion-text color="white">27th</span></ion-option>
+              <ion-option value="28"><span ion-text color="white">28th</span></ion-option>
+            </ion-select>
+          </ion-item>
+
           <ion-item>
             <ion-label ion-text color="white">Bank Transfer</ion-label>
-              <ion-radio selected   value="bankTransfer" ></ion-radio>
+              <ion-radio    value="bankTransfer" (ionSelect)="selectPaymentMethod('bankTransfer')"></ion-radio>
           </ion-item>
             </ion-list>
          <ion-item>
             <div class="frgt-area">
-                <button class="button-md-success" ion-button round type="submit">Submit</button>
+                <button class="button-md-success" ion-button round (click)="logForm(data.paymentOption)">Submit</button>
          </div>
          </ion-item>
   </ion-list>

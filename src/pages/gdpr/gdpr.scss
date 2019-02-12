@@ -1,0 +1,57 @@
+page-gdpr {
+    .scroll-content {
+        background-image: url('../../assets/imgs/home.png');
+        background-size: cover;
+        background-position: center top;
+        width: 100%;
+        height: 100%;
+       // background: image(assets/imgs/bg-ban-seller);
+        //background-color: rgb(110, 23, 2);
+      }
+      #welcome{
+        // background: color($colors, energy);
+        h3{
+            font-size: 25px;
+            margin-top:50px;
+            text-align: center;
+        }
+        .marginTop{
+            margin-top:150px;
+        }
+        .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 280px;
+            height: auto;
+            margin-bottom: 40px;
+            margin-top: 110px;
+        }
+        h4{
+            margin-top:0px;
+            font-size: 15px;
+        }
+    }
+    .wlcm-itm{
+        background: none;
+        padding-left: 0
+    }
+    .wlcm-abc{
+        background: none;
+        padding-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        margin-bottom: 29px;
+    }
+    .wlcm-crd {
+        background: none;
+        box-shadow: none;
+    }
+    .frgt-area2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .error {
+        color: rgb(223, 62, 62);
+        font-size: 11px;
+      }
+}

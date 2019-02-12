@@ -1,6 +1,6 @@
-import { PricingPage } from './../pricing/pricing';
+
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
-import { Component, NgModule, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 

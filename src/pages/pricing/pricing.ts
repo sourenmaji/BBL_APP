@@ -16,6 +16,7 @@ export class PricingPage {
   category: any;
   typeAs: any;
   type: any;
+  purchaseType: any;
   bootcampPlan: any =[];
   ptPlan: any =[];
   priceCategory = [ {
@@ -26,12 +27,13 @@ export class PricingPage {
 ];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private loadingCtrl: LoadingController,
              private authService: AuthServiceProvider, private alertCtrl: AlertController) {      
-  console.log('cons')              
+              
               this.openPricing();  
+              this.purchaseType = this.navParams.get('purchaseType');
   }
 
   ionViewDidEnter(){
-    console.log('did') 
+   
     if(this.authService.pageReset)
     {
       console.log(this.lastClicked);
@@ -40,7 +42,7 @@ export class PricingPage {
   }
   getProducts(c: any)
   {
-    
+    console.log(c);
     this.lastClicked = c;
     this.category=c.moduleName;
     console.log(this.category);
@@ -76,7 +78,14 @@ export class PricingPage {
       const value1 = this.responseData.personal_training_product_details;
       this.priceDetails = value;
       this.ptDetails = value1;
-      this.getProducts(this.priceCategory[0]);
+      
+      if(this.purchaseType == "personal_training"){
+        this.getProducts(this.priceCategory[1]);
+      }else if(this.purchaseType == "bootcamp"){
+        this.getProducts(this.priceCategory[0]);
+      }else{
+        this.getProducts(this.priceCategory[0]);
+      }
       }
       else{
        const alert = this.alertCtrl.create({

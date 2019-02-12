@@ -1,7 +1,7 @@
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController } from 'ionic-angular';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import {  DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({

@@ -1,6 +1,6 @@
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Slides, LoadingController, AlertController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({

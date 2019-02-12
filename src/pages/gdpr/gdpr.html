@@ -1,0 +1,61 @@
+
+<ion-content padding id="welcome" class="scroll-content">
+    <!-- <ion-card class="wlcm-crd">
+        <ion-card-content> -->
+         
+              <form novalidate  [formGroup]="signupform">
+    <ion-item class="wlcm-itm">
+        <p text-wrap ion-text color="white"> Are you happy for Body By Lekan to contact you for any offers/discounts/news/marketing purposes?</p>
+      </ion-item>
+      <ion-row radio-group [(ngModel)]="userData.customer_communication" formControlName="customer_communication"
+      (ionChange)="change($event)">
+        <!-- <ion-col>
+          <ion-item class="wlcm-abc">
+            <ion-icon color="white" name="transgender"></ion-icon>Gender
+          </ion-item>
+        </ion-col> -->
+        <ion-col>
+          <ion-item class="wlcm-abc">
+            <ion-label ion-text color="white">yes</ion-label>
+            <ion-radio   value="1" ></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="wlcm-abc">
+           <ion-label ion-text color="white">no</ion-label>
+            <ion-radio  value="0" ></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item class="wlcm-itm" *ngIf="ischecked">
+        <p text-wrap ion-text color="white">If yes, then please specify methods of communication? <span style="color: red">*</span></p>
+      </ion-item>
+     
+        <!-- <div *ngFor="let member of mediaList" >
+          <ion-label>{{member.testName}}
+          <ion-checkbox color="dark" [(ngModel)]="member.checked" formControlName="check_val" (ionChange)="show()"></ion-checkbox></ion-label>
+        </div> -->
+         <div  *ngIf="ischecked"> 
+        <ion-label style="display:inline-block" ion-text color="white">Whatsapp
+          <ion-checkbox color="dark"  formControlName="is_whatsapp" value="1" (ionChange)="show()"></ion-checkbox></ion-label>
+        
+          <ion-label style="display:inline-block" ion-text color="white">SMS
+            <ion-checkbox color="dark"  formControlName="is_sms" (ionChange)="show()"></ion-checkbox></ion-label>
+            <ion-label style="display:inline-block" ion-text color="white">Phone
+              <ion-checkbox color="dark"  formControlName="is_phone" (ionChange)="show()"></ion-checkbox></ion-label>
+              <ion-label style="display:inline-block" ion-text color="white">Email
+                <ion-checkbox color="dark"  formControlName="is_email" (ionChange)="show()"></ion-checkbox></ion-label>
+         </div>  
+         <ion-item class="wlcm-itm" *ngIf="ischecked && isSelect">
+          <div class="error" ion-text color="white">
+            Please Select Atleast One
+          </div>
+         </ion-item> 
+         <div class="frgt-area2">
+            <button class="button-md-success" ion-button round [disabled]="signupform.invalid || isSelect" (click)="updateProfile()">Submit</button><br/>
+            </div>
+         </form>
+         <!-- </ion-card-content> -->
+         <!-- </ion-card> -->
+  </ion-content>
+

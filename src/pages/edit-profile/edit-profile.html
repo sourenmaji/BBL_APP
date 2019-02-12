@@ -18,7 +18,7 @@
              
               <ion-item class="box-image">
                       <img src="assets/imgs/profile.png">
-                      <h1 ion-text style="text-align: center" color="text">Hii {{userDetails.name}}</h1>
+                      <h1 ion-text style="text-align: center" color="text">{{userDetails.name}}</h1>
               </ion-item>
           <ion-list>
               <form novalidate [formGroup]="editform">
@@ -43,7 +43,7 @@
                 </ion-item>
                     <ion-item>
                       <ion-label ><ion-icon color="grey" name="mail"></ion-icon>Email <span style="color: red">*</span></ion-label>
-                      <ion-input type="email" [(ngModel)]="userData.email" value="{{userDetails.email}}"
+                      <ion-input type="email" [(ngModel)]="userData.email" value="{{userDetails.email}}" disabled="true"
                       formControlName="email" [class.error1]="!editform.controls.email.valid && editform.controls.email.dirty"></ion-input>
                     </ion-item>
                     <ion-item no-lines *ngIf="( editform.get('email').hasError('minlength') || editform.get('email').hasError('pattern') ||editform.get('email').hasError('required') ) && editform.get('email').touched">
@@ -74,7 +74,7 @@
                        
                         <ion-item>
                             <ion-label ><ion-icon color="grey" name="locate"></ion-icon>Address</ion-label>
-                            <ion-textarea myInput type="text" value="{{userDetails.address}}" [(ngModel)]="userData.address" (keyup)="loadMap()" id="txtHome"formControlName="address"></ion-textarea>
+                            <ion-textarea myInput type="text" value="{{userDetails.address}}" [(ngModel)]="userData.address"  id="txtHome"formControlName="address"></ion-textarea>
                           </ion-item>
                           <div class="frgt-area2">
                           <button  ion-button round color="success"  [disabled]="editform.invalid" (click)="updateProfile()">Save</button><br/>

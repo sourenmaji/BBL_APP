@@ -1,9 +1,8 @@
 import { AuthServiceProvider } from './../../providers/auth-service/authservice';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
-import { MapsAPILoader } from '@agm/core';
-declare var google;
+
 
 @IonicPage()
 @Component({
@@ -19,8 +18,7 @@ export class EditProfilePage implements OnInit{
   newU = {"success": {"token":"","user":""}};
   userData = { name: "",email: "",ph_no: "",address: ""};
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
-              private authService: AuthServiceProvider, private alertCtrl: AlertController, private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private authService: AuthServiceProvider, private alertCtrl: AlertController) {
   
     const data = JSON.parse(localStorage.getItem('userData'));
                 this.userDetails = data.user;
@@ -29,35 +27,35 @@ export class EditProfilePage implements OnInit{
                 this.userPostData.token = data.token;
   }
 
-  loadMap()
-  {
-    this.mapsAPILoader.load().then(() => {
-      let nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
-      let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
-          types: ["geocode"],componentRestrictions: {country: 'in'}
-      });
-      autocomplete.addListener("place_changed", () => {
-          this.ngZone.run(() => {
-              //get the place result
-              let place: any = autocomplete.getPlace();
+  // loadMap()
+  // {
+  //   this.mapsAPILoader.load().then(() => {
+  //     let nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
+  //     let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
+  //         types: ["geocode"],componentRestrictions: {country: 'in'}
+  //     });
+  //     autocomplete.addListener("place_changed", () => {
+  //         this.ngZone.run(() => {
+  //             //get the place result
+  //             let place: any = autocomplete.getPlace();
 
-              //verify result
-              if (place.geometry === undefined || place.geometry === null) {
-                  return;
-              }
+  //             //verify result
+  //             if (place.geometry === undefined || place.geometry === null) {
+  //                 return;
+  //             }
 
-              //set latitude, longitude and zoom
-              this.userData.address = place.formatted_address;
-              // this.form2data.map_address = place.formatted_address;
-              // this.latitude = place.geometry.location.lat();
-              // this.longitude = place.geometry.location.lng();
-              // this.latmap = this.latitude;
-              // this.lngmap = this.longitude;
-              // this.zoom = 16;
-          });
-      });
-  });
-  }
+  //             //set latitude, longitude and zoom
+  //             this.userData.address = place.formatted_address;
+  //             // this.form2data.map_address = place.formatted_address;
+  //             // this.latitude = place.geometry.location.lat();
+  //             // this.longitude = place.geometry.location.lng();
+  //             // this.latmap = this.latitude;
+  //             // this.lngmap = this.longitude;
+  //             // this.zoom = 16;
+  //         });
+  //     });
+  // });
+  // }
   onOpenMenu(){
     this.menuCtrl.open();
     }
